@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Projects | Team Solutions Bangladesh{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">OUR PROJECTS</span>
+    <h1>Selected digital solutions.</h1>
+    <p>A selection of practical projects and technology solutions.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container project-grid">
+    {% for project in projects %}
+    <article class="project-card">
+      <div class="project-image">
+        {% if project.image_url %}
+          <img src="{{ project.image_url }}" alt="{{ project.title }}">
+        {% endif %}
+      </div>
+      <div class="project-body">
+        {% if project.service_name %}
+          <span class="eyebrow">{{ project.service_name }}</span>
+        {% endif %}
+        <h3>{{ project.title }}</h3>
+        <p>{{ project.text }}</p>
+      </div>
+    </article>
+    {% empty %}
+      <p>No projects are available right now.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

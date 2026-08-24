@@ -1,0 +1,196 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+                Blog
+            </h3>
+
+            <p class="text-muted mb-0">
+                Manage blog posts
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'add-blog' %}"
+            class="btn btn-primary"
+        >
+            + Add Blog
+        </a>
+
+    </div>
+
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table
+                    class="table table-hover align-middle"
+                    id="blogTable"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+
+                            <th>Title</th>
+
+                            <th>Slug</th>
+
+                            <th>Author</th>
+
+                            <th>Status</th>
+
+                            <th>Created</th>
+
+                            <th class="text-end">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for blog in blogs %}
+
+                        <tr>
+
+                            <td>
+                                {{ forloop.counter }}
+                            </td>
+
+
+                            <td>
+
+                                <strong>
+                                    {{ blog.1 }}
+                                </strong>
+
+                            </td>
+
+
+                            <td>
+                                {{ blog.2 }}
+                            </td>
+
+
+                            <td>
+                                {{ blog.5|default:"-" }}
+                            </td>
+
+
+                            <td>
+
+                                {% if blog.6 == 1 %}
+
+                                    <span class="badge bg-success">
+                                        Active
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+                                        Inactive
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+                                {{ blog.7|date:"d M Y" }}
+                            </td>
+
+
+                            <td class="text-end">
+
+                                <a
+                                    href="{% url 'edit-blog' blog.0 %}"
+                                    class="btn btn-sm btn-outline-primary"
+                                >
+                                    Edit
+                                </a>
+
+
+                                <button
+                                    type="button"
+                                    class="btn btn-sm btn-outline-danger"
+                                    onclick="deleteBlog({{ blog.0 }})"
+                                >
+                                    Delete
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="text-center py-5"
+                            >
+
+                                <span class="text-muted">
+                                    No blog posts found.
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<form
+    method="POST"
+    id="deleteBlogForm"
+    style="display:none;"
+>
+
+    {% csrf_token %}
+
+</form>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static "js/blog/blog.js" %}"></script>
+
+{% endblock %}

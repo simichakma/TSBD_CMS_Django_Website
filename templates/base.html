@@ -1,0 +1,428 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        {% block title %}Team Solutions Bangladesh{% endblock %}
+    </title>
+
+    <meta
+        name="description"
+        content="Team Solutions Bangladesh - Technology, software and business solutions."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER / NAVBAR
+    ========================== -->
+    <header class="site-header">
+        <div class="container nav-wrap">
+
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="brand">
+                <img
+                    src="{% static 'images/logo.png' %}"
+                    alt="Team Solutions Bangladesh"
+                    class="site-logo"
+                />
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Toggle navigation"
+            >
+                ☰
+            </button>
+
+            <!-- Main Navigation -->
+            <nav id="mainNav">
+
+                <!-- Home -->
+                <a
+                    href="{% url 'home' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+                >
+                    Home
+                </a>
+
+
+                <!-- =========================
+                     SERVICES DROPDOWN
+                ========================== -->
+                <div class="nav-dropdown">
+
+                    <a
+                        href="{% url 'services' %}"
+                        class="nav-link dropdown-toggle-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+                    >
+                        Services ▾
+                    </a>
+
+                    <div class="dropdown-menu">
+
+                        {% for service in menu_services %}
+
+                            <a
+                                href="{% url 'services' %}#service-{% if service.id %}{{ service.id }}{% else %}{{ service.0 }}{% endif %}"
+                            >
+
+                                {% if service.title %}
+                                    {{ service.title }}
+                                {% elif service.name %}
+                                    {{ service.name }}
+                                {% else %}
+                                    {{ service.1 }}
+                                {% endif %}
+
+                            </a>
+
+                        {% empty %}
+
+                            <span class="dropdown-empty">
+                                No services available
+                            </span>
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+
+                <!-- Projects -->
+                <a
+                    href="{% url 'projects' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}"
+                >
+                    Projects
+                </a>
+
+
+                <!-- Products -->
+                <a
+                    href="{% url 'products' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+                >
+                    Products
+                </a>
+
+
+                <!-- Blog -->
+                <a
+                    href="{% url 'blog' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+                >
+                    Blog
+                </a>
+
+
+                <!--team-->
+                <a
+                    href="{% url 'team' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'team' or request.resolver_match.url_name == 'team-detail' %}active{% endif %}"
+                >
+                    Team
+                </a>
+
+                <!-- About Us -->
+                <a
+                    href="{% url 'about' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                >
+                    About Us
+                </a>
+
+
+                <!-- Contact Button -->
+                <button
+                    type="button"
+                    class="nav-btn btn btn-primary border-0"
+                    data-bs-toggle="modal"
+                    data-bs-target="#contactModal"
+                >
+                    Contact Us
+                </button>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- =========================
+         CONTACT MODAL
+    ========================== -->
+    <div
+        class="modal fade"
+        id="contactModal"
+        tabindex="-1"
+        aria-labelledby="contactModalLabel"
+        aria-hidden="true"
+    >
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content border-0 shadow-lg rounded-4">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary text-white rounded-top-4">
+
+                    <h5
+                        class="modal-title fw-bold"
+                        id="contactModalLabel"
+                    >
+                        Get in Touch with Us
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <!-- Modal Body -->
+                <div class="modal-body p-4 text-start">
+
+                    <form
+                        method="POST"
+                        action="{% url 'contact' %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <!-- Name -->
+                        <div class="mb-3">
+
+                            <label
+                                for="modal-name"
+                                class="form-label fw-semibold"
+                            >
+                                Your Name
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="modal-name"
+                                name="name"
+                                placeholder="Enter your name"
+                                required
+                            />
+
+                        </div>
+
+
+                        <!-- Email -->
+                        <div class="mb-3">
+
+                            <label
+                                for="modal-email"
+                                class="form-label fw-semibold"
+                            >
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="modal-email"
+                                name="email"
+                                placeholder="name@example.com"
+                                required
+                            />
+
+                        </div>
+
+
+                        <!-- Message -->
+                        <div class="mb-3">
+
+                            <label
+                                for="modal-message"
+                                class="form-label fw-semibold"
+                            >
+                                Message
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="modal-message"
+                                name="message"
+                                rows="4"
+                                placeholder="Write your message here..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- Submit -->
+                        <div class="d-grid">
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary py-2 fw-bold"
+                            >
+                                Send Message
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <main>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+        </div>
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="footer">
+
+        <div class="container footer-grid">
+
+            <!-- Company -->
+            <div>
+
+                <div class="brand footer-brand">
+
+                    <img
+                        src="{% static 'images/TS_logo.png' %}"
+                        alt="Team Solutions Bangladesh"
+                        class="brand-logo"
+                    />
+
+                    <span>
+                        <strong>Team Solutions Bangladesh</strong>
+                    </span>
+
+                </div>
+
+                <p>
+                    Building practical digital solutions for organizations
+                    and businesses.
+                </p>
+
+            </div>
+
+
+            <!-- Quick Links -->
+            <div>
+
+                <h4>Quick Links</h4>
+
+                <a href="{% url 'about' %}">
+                    About
+                </a>
+
+                <a href="{% url 'services' %}">
+                    Services
+                </a>
+
+                <a href="{% url 'projects' %}">
+                    Projects
+                </a>
+
+                <a href="{% url 'contact' %}">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <!-- Contact -->
+            <div>
+
+                <h4>Contact</h4>
+
+                <p>
+                    Email: info@example.com
+                </p>
+
+                <p>
+                    Dhaka, Bangladesh
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Copyright -->
+        <div class="copyright">
+
+            © {% now "Y" %}
+            Team Solutions Bangladesh.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         BOOTSTRAP JS
+    ========================== -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <!-- Main JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+    {% block extra_js %}
+    {% endblock %}
+
+</body>
+</html>

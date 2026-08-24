@@ -1,0 +1,90 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}Services Management | TSBD CMS{% endblock %}
+{% block content %}
+<div class="mb-4">
+    <h2 class="fw-bold mb-1" id="formTitle">Add Service</h2>
+    <p class="text-muted mb-0">Create and manage the services shown on the public website.</p>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white fw-semibold" id="formHeader">Service Form</div>
+            <div class="card-body">
+                <form method="post" action="{% url 'service_save' %}" id="serviceForm">
+                    {% csrf_token %}
+                    <input type="hidden" name="service_id" id="service_id">
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Service Name</label>
+                        <input class="form-control" type="text" name="service_name" id="service_name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Service Details</label>
+                        <textarea class="form-control" name="service_details" id="service_details" rows="7"></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-semibold">Status</label>
+                        <select class="form-select" name="status" id="status">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary" type="submit" id="saveButton">Save Service</button>
+                        <button class="btn btn-light border" type="button" id="resetButton">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <strong>Service List</strong>
+                <span class="badge bg-primary">{{ services|length }}</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                    <tr><th>ID</th><th>Service Name</th><th>Details</th><th>Status</th><th>Action</th></tr>
+                    </thead>
+                    <tbody>
+                    {% for service in services %}
+                    <tr>
+                        <td>{{ service.id }}</td>
+                        <td><strong>{{ service.service_name }}</strong></td>
+                        <td>{{ service.service_details|truncatechars:70 }}</td>
+                        <td>
+                            {% if service.status == 1 %}<span class="badge bg-success">Active</span>{% else %}<span class="badge bg-secondary">Inactive</span>{% endif %}
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-primary edit-service"
+                                data-id="{{ service.id }}"
+                                data-name="{{ service.service_name|escape }}"
+                                data-details="{{ service.service_details|escape }}"
+                                data-status="{{ service.status }}">Edit</button>
+                            <form method="post" action="{% url 'service_delete' service.id %}" class="d-inline" onsubmit="return confirm('Delete this service?');">
+                                {% csrf_token %}
+                                <button class="btn btn-sm btn-outline-danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5" class="text-center py-4">No services found.</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/services/service.js' %}"></script>
+{% endblock %}

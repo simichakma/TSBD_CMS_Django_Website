@@ -1,0 +1,266 @@
+{% extends "dashboard/base.html" %} {% load static %} {% block title %} Projects
+Management | TSBD CMS {% endblock %} {% block content %}
+
+<div class="mb-4">
+  <h2 class="fw-bold mb-1" id="projectFormTitle">Add Project</h2>
+
+  <p class="text-muted mb-0">
+    Create and manage the projects shown on the public website.
+  </p>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white fw-semibold" id="formCardTitle">
+        Project Form
+      </div>
+      <div class="card-body">
+        <form
+          method="post"
+          action="{% url 'project_save' %}"
+          enctype="multipart/form-data"
+          id="projectForm"
+        >
+          {% csrf_token %}
+          <input type="hidden" name="project_id" id="project_id" />
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Project Name</label>
+            <input
+              class="form-control"
+              type="text"
+              name="project_name"
+              id="project_name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Service</label>
+            <select
+              class="form-select"
+              name="service_id"
+              id="service_id"
+              required
+            >
+              <option value="">-- Select Service --</option>
+              {% for service in services %}
+              <option value="{{ service.0 }}">{{ service.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Project Details</label>
+            <textarea
+              class="form-control"
+              name="project_details"
+              id="project_details"
+              rows="6"
+            ></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <i class="bi bi-link-45deg me-1"></i>Demo Link
+            </label>
+            <input
+              class="form-control"
+              type="url"
+              name="damo_link"
+              id="damo_link"
+              placeholder="https://example.com/demo"
+            />
+            <small class="text-muted d-block mt-1">
+              <i class="bi bi-info-circle me-1" style="font-size: 0.85rem"></i
+              >Optional: Link to project demo or live website
+            </small>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Project Image</label>
+            <input
+              class="form-control"
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+            />
+            <small class="text-muted"
+              >Upload a new image only when needed.</small
+            >
+
+            <div id="currentImageBox" class="mt-2 d-none">
+              <small class="text-muted d-block mb-1">Current Image</small>
+              <img
+                id="currentImage"
+                width="120"
+                height="80"
+                class="rounded border"
+                style="object-fit: cover"
+                alt="Current image"
+              />
+            </div>
+
+            <div id="previewBox" class="mt-2 d-none">
+              <small class="text-muted d-block mb-1">New Image Preview</small>
+              <img
+                id="imagePreview"
+                width="120"
+                height="80"
+                class="rounded border"
+                style="object-fit: cover"
+                alt="Preview"
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Status</label>
+            <select class="form-select" name="status" id="project_status">
+              <option value="1">Active</option>
+              <option value="0">Inactive</option>
+            </select>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button
+              class="btn btn-success"
+              type="submit"
+              id="projectSaveButton"
+            >
+              Save Project
+            </button>
+            <button
+              class="btn btn-light border"
+              type="button"
+              id="projectResetButton"
+            >
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card border-0 shadow-sm">
+      <div
+        class="card-header bg-white d-flex justify-content-between align-items-center"
+      >
+        <strong>Project List</strong>
+        <span class="badge bg-success">{{ projects|length }}</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Project</th>
+              <th>Service</th>
+              <th>Details</th>
+              <th>Damo Link</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for project in projects %}
+            <tr>
+              <td>{{ project.id }}</td>
+
+              <td>
+                {% if project.image_url %}
+                <img
+                  src="{{ project.image_url }}"
+                  width="70"
+                  height="50"
+                  class="rounded"
+                  style="object-fit: cover"
+                  alt="{{ project.project_name }}"
+                />
+                {% else %}
+                <span class="text-muted">-</span>
+                {% endif %}
+              </td>
+
+              <td><strong>{{ project.project_name }}</strong></td>
+
+              <td>
+                {% if project.service_name %}
+                <span class="badge bg-primary">{{ project.service_name }}</span>
+                {% else %}
+                <span class="text-muted">No Service</span>
+                {% endif %}
+              </td>
+
+              <td>
+                {% if project.damo_link %}
+                <a
+                  href="{{ project.damo_link }}"
+                  target="_blank"
+                  class="btn btn-sm btn-info"
+                >
+                  <i class="bi bi-box-arrow-up-right"></i> Live Demo
+                </a>
+                {% else %}
+                <span class="text-muted">No Link</span>
+                {% endif %}
+              </td>
+
+              <td>{{ project.project_details|truncatechars:60 }}</td>
+
+              <td>
+                {% if project.status == 1 %}
+                <span class="badge bg-success">Active</span>
+                {% else %}
+                <span class="badge bg-secondary">Inactive</span>
+                {% endif %}
+              </td>
+
+              <td>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-primary edit-project"
+                  data-id="{{ project.id }}"
+                  data-name="{{ project.project_name|escape }}"
+                  data-service="{{ project.service_id|default:'' }}"
+                  data-details="{{ project.project_details|escape }}"
+                  data-status="{{ project.status }}"
+                  data-image="{{ project.image_url|escape }}"
+                  data-damo="{{ project.damo_link|escape }}"
+                >
+                  Edit
+                </button>
+
+                <form
+                  method="post"
+                  action="{% url 'project_delete' project.id %}"
+                  class="d-inline"
+                  onsubmit="return confirm('Delete this project?');"
+                >
+                  {% csrf_token %}
+                  <button class="btn btn-sm btn-outline-danger" type="submit">
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center py-4">No projects found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/projects/project.js' %}"></script>
+{% endblock %}

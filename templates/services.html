@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block title %}Services | Team Solutions
+Bangladesh{% endblock %} {% block content %}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">OUR SERVICES</span>
+    <h1>Technology solutions built around your needs.</h1>
+    <p>Practical services for organizations, businesses and digital growth.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card-grid three">
+    {% for service in services %}
+
+    <article class="service-card" id="service-{{ service.id }}">
+      <div class="service-icon">{{ service.number }}</div>
+
+      <h3>{{ service.title }}</h3>
+
+      <p>{{ service.description }}</p>
+    </article>
+
+    {% empty %}
+
+    <p>No services are available right now.</p>
+
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
