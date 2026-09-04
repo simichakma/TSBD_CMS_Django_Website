@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Team Member | Team Solutions Bangladesh{% endblock %}
+<<<<<<< HEAD
 {% block content %}
 
 <main id="memberDetail" data-member-id="{{ member_id }}" data-api-url="{% url 'team-member-api' member_id %}">
+=======
+
+{% block content %}
+<main id="memberDetail" data-slug="{{ member_slug }}" data-api-url="{% url 'team-member-api' member_slug %}">
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
   <section class="member-detail-hero">
     <div class="container">
       <a class="member-back-link" href="{% url 'team' %}">← Back to our team</a>

@@ -20,8 +20,13 @@ def _image_url(image):
     return f"{settings.MEDIA_URL}{image if image.startswith('team/') else 'team/' + image}"
 
 
+<<<<<<< HEAD
 def _public_url(request, member_id):
     return request.build_absolute_uri(reverse("team-detail", kwargs={"member_id": member_id}))
+=======
+def _public_url(request, slug):
+    return request.build_absolute_uri(reverse("team-detail", kwargs={"member_slug": slug}))
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def _unique_slug(name, team_id=None):
@@ -49,8 +54,13 @@ def _row_to_member(row, request=None):
         "phone": row[6] or "", "image": row[7] or "", "image_url": _image_url(row[7]),
         "status": bool(row[8]), "slug": row[9] or "",
     }
+<<<<<<< HEAD
     if request and member["id"]:
         member["public_url"] = _public_url(request, member["id"])
+=======
+    if request and member["slug"]:
+        member["public_url"] = _public_url(request, member["slug"])
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     return member
 
 
@@ -97,12 +107,19 @@ def add_team(request):
                 request.POST.get("linkedin", "").strip(), image_path,
                 1 if request.POST.get("status") == "1" else 0, slug,
             ])
+<<<<<<< HEAD
             team_id = cursor.lastrowid
+=======
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     except Exception:
         if image_path:
             default_storage.delete(image_path)
         raise
+<<<<<<< HEAD
     return JsonResponse({"success": True, "message": "Team member saved successfully.", "slug": slug, "public_url": _public_url(request, team_id)})
+=======
+    return JsonResponse({"success": True, "message": "Team member saved successfully.", "slug": slug, "public_url": _public_url(request, slug)})
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def get_team(request, team_id):
@@ -143,7 +160,11 @@ def edit_team(request, team_id):
         ])
     if image and old_image and old_image != image_path and str(old_image).startswith("team/"):
         default_storage.delete(old_image)
+<<<<<<< HEAD
     return JsonResponse({"success": True, "message": "Team member updated successfully.", "slug": slug, "public_url": _public_url(request, team_id)})
+=======
+    return JsonResponse({"success": True, "message": "Team member updated successfully.", "slug": slug, "public_url": _public_url(request, slug)})
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def delete_team(request, team_id):

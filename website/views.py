@@ -16,6 +16,7 @@ def _public_services():
                 ORDER BY id ASC
             """)
             rows = cursor.fetchall()
+<<<<<<< HEAD
     except Exception as e:
         print("SERVICE LOAD ERROR:", e)
         return []
@@ -50,6 +51,21 @@ def _public_services():
             "modules": modules,
         })
     return services
+=======
+    except Exception:
+        rows = []
+
+    return [
+        {
+            "id": row[0],
+            "title": row[1],
+            "description": row[2] or "",
+            "text": row[2] or "",
+            "number": f"{index:02d}",
+        }
+        for index, row in enumerate(rows, start=1)
+    ]
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def _image_url(image):
@@ -64,6 +80,7 @@ def _image_url(image):
 
 
 def _public_team():
+<<<<<<< HEAD
     select_columns = [
         "id", "name", "designation", "linkedin", "bio", "email",
         "image", "status",
@@ -85,10 +102,27 @@ def _public_team():
                 WHERE status = 1
                 ORDER BY id ASC
             """.format(columns=", ".join(select_columns)))
+=======
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT
+                    id,
+                    name,
+                    designation,
+                    linkedin,
+                    bio,
+                    email, phone, image, status, slug
+                FROM tsbd_team
+                WHERE status = 1
+                ORDER BY id ASC
+            """)
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
             rows = cursor.fetchall()
 
     except Exception as e:
+<<<<<<< HEAD
         print("TEAM LOAD ERROR:", e)
         rows = []
 
@@ -109,6 +143,24 @@ def _public_team():
             "image_url": _image_url(member["image"]),
         })
     return members
+=======
+        rows = []
+    return [
+            {"id": row[0],
+            "name": row[1] or "",
+            "designation": row[2] or "",
+            "linkedin": row[3] or "",
+            "bio": row[4] or "",
+            "email": row[5] or "",
+            "phone": row[6] or "",
+            "image": row[7] or "",
+            "status": row[8],
+            "slug": row[9] or "",
+            "image_url": _image_url(row[7]),
+        }
+        for row in rows
+    ]
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def _public_projects():
@@ -155,6 +207,7 @@ def _public_products():
                 ORDER BY id DESC
             """)
             rows = cursor.fetchall()
+<<<<<<< HEAD
     except Exception as e:
         print("PRODUCT LOAD ERROR:", e)
         rows = []
@@ -185,13 +238,28 @@ def _public_products():
         products.append({
             "id": r[0],
             "product_name": r[1] or "",
+=======
+    except Exception:
+        rows = []
+
+    return [
+        {
+            "id": r[0],
+            "product_name": r[1],
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
             "product_details": r[2] or "",
             "image": r[3] or "",
             "image_url": _image_url(r[3]),
             "status": r[4],
+<<<<<<< HEAD
             "modules": modules,
         })
     return products
+=======
+        }
+        for r in rows
+    ]
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def _public_blogs():
@@ -233,11 +301,19 @@ def _public_blogs():
 
 def home(request):
     return render(request, "index.html", {
+<<<<<<< HEAD
         "services": _public_services(),
         "projects": _public_projects(),
         "products": _public_products(),
         "blogs": _public_blogs()[:3],
         "team": _public_team(),
+=======
+        "services": _public_services()[:3],
+        "projects": _public_projects()[:3],
+        "products": _public_products()[:3],
+        "blogs": _public_blogs()[:3],
+        "team": _public_team()[:3],
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     })
 
 
@@ -249,6 +325,7 @@ def services(request):
     return render(request, "services.html", {"services": _public_services()})
 
 
+<<<<<<< HEAD
 def service_detail(request, service_id):
     services = _public_services()
     service = next((item for item in services if item["id"] == service_id), None)
@@ -257,6 +334,8 @@ def service_detail(request, service_id):
     return render(request, "public/service_detail.html", {"service": service})
 
 
+=======
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 def projects(request):
     return render(request, "projects.html", {"projects": _public_projects()})
 
@@ -290,6 +369,7 @@ def team(request):
     return render(request,"public/team.html",{"members": _public_team()})
 
 
+<<<<<<< HEAD
 def team_detail(request, member_id):
     if not any(member["id"] == member_id for member in _public_team()):
         raise Http404("Team member not found.")
@@ -298,10 +378,24 @@ def team_detail(request, member_id):
 
 def team_member_api(request, member_id):
     member = next((item for item in _public_team() if item["id"] == member_id), None)
+=======
+def team_detail(request, member_slug):
+    if not any(member["slug"] == member_slug for member in _public_team()):
+        raise Http404("Team member not found.")
+    return render(request, "public/team_detail.html", {"member_slug": member_slug})
+
+
+def team_member_api(request, member_slug):
+    member = next((item for item in _public_team() if item["slug"] == member_slug), None)
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     if member is None:
         return JsonResponse({"success": False, "message": "Team member not found."}, status=404)
     return JsonResponse({"success": True, "member": member})
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 def contact(request):
     if request.method == "POST":
         name = request.POST.get("name", "").strip()

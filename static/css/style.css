@@ -7,9 +7,12 @@
     --border: #e4e7ec;
     --white: #ffffff;
     --shadow: 0 15px 45px rgba(16, 24, 40, 0.08);
+<<<<<<< HEAD
     --shadow-sm: 0 4px 12px rgba(16, 24, 40, 0.06);
     --shadow-lg: 0 20px 60px rgba(16, 24, 40, 0.12);
     --transition: all 0.3s ease;
+=======
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 }
 
 
@@ -2174,6 +2177,7 @@ nav a.nav-link.active::after {
 .site-header #mainNav {
     overflow: visible !important;
 }
+<<<<<<< HEAD
 
 
 /* =========================================================
@@ -4110,3 +4114,5 @@ nav a.nav-link.active::after {
         transition: none;
     }
 }
+=======
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de

@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         toggle.addEventListener("click", function () {
             nav.classList.toggle("open");
         });
+<<<<<<< HEAD
 
         nav.querySelectorAll("a").forEach(function (link) {
             link.addEventListener("click", function () {
@@ -54,5 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (backdrop) backdrop.remove();
             }, { once: true });
         }
+=======
+    }
+
+    document.querySelectorAll("#mainNav a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            nav.classList.remove("open");
+        });
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     });
 });

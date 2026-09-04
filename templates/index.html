@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %} 
 {% load static %} 
 {% block title %}Home |TeamSolutionsBangladesh
@@ -1838,6 +1839,358 @@ document.addEventListener(
 <!-- =====================================================
      PRODUCTS
 ===================================================== -->
+=======
+{% extends "base.html" %} {% load static %} {% block title %}Home |TeamSolutions
+Bangladesh{% endblock %} {% block content %}
+<style>
+  /* Typing Cursor Animation */
+  .cursor {
+    display: inline-block;
+    color: #0066ff;
+    animation: blink 0.7s infinite;
+    font-weight: 300;
+  }
+
+  @keyframes blink {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* Text Fade & Slide right-to-left effect */
+  #dynamic-text {
+    color: #0066ff;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
+
+  /* Universal Candy Blue Button Style */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #258eff 0%, #0066ff 60%, #0052cc 100%);
+    box-shadow:
+      0px 12px 24px -6px rgba(0, 102, 255, 0.5),
+      inset 0px 2px 2px rgba(255, 255, 255, 0.6),
+      inset 0px -3px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0px 18px 30px -4px rgba(0, 102, 255, 0.65),
+      inset 0px 3px 3px rgba(255, 255, 255, 0.8),
+      inset 0px -3px 4px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.05);
+  }
+
+  .btn-primary:active {
+    transform: translateY(1px);
+    box-shadow:
+      0px 6px 12px -2px rgba(0, 102, 255, 0.4),
+      inset 0px 1px 2px rgba(255, 255, 255, 0.4),
+      inset 0px -2px 3px rgba(0, 0, 0, 0.3);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const words = [
+      "a better tomorrow.",
+      "your business growth.",
+      "digital success.",
+      "modern web apps.",
+    ];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const dynamicText = document.getElementById("dynamic-text");
+
+    function typeEffect() {
+      const currentWord = words[wordIndex];
+
+      if (isDeleting) {
+        dynamicText.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        dynamicText.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(typeEffect, typeSpeed);
+    }
+
+    typeEffect();
+  });
+</script>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="eyebrow">TECHNOLOGY • INNOVATION • SOLUTIONS</span>
+
+      <h1>
+        Smart technology solutions for <span id="dynamic-text"></span
+        ><span class="cursor">|</span>
+      </h1>
+
+      <p>
+        We create reliable websites, software systems and customized digital
+        solutions that help organizations work smarter.
+      </p>
+      <div class="hero-actions">
+        <a href="{% url 'services' %}" class="btn btn-primary"
+          >Explore Services</a
+        >
+        <a href="{% url 'contact' %}" class="btn btn-outline">Let's Talk</a>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="floating-card card-one">
+        <span>01</span>
+        <strong>Software</strong>
+        <small>Custom solutions</small>
+      </div>
+      <div class="floating-card card-two">
+        <span>02</span>
+        <strong>Web</strong>
+        <small>Modern experiences</small>
+      </div>
+      <div class="hero-center">
+        <div class="hero-logo">TS</div>
+        <h3>Digital Solutions</h3>
+        <p>Designed for real-world needs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5" style="background: #eef2f3">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-lg-6">
+        <span
+          class="text-uppercase text-primary fw-bold"
+          style="font-size: 12px; letter-spacing: 1px"
+        >
+          WHAT WE DO
+        </span>
+        <h2 class="fw-bold mb-1 text-dark">Our core services</h2>
+        <p class="text-muted mb-0">
+          Technology solutions built around your organization's needs.
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      {% for service in services %}
+      <div class="col-lg-3 col-md-6">
+        <div
+          class="service-card position-relative rounded-4 overflow-hidden shadow-sm h-100 bg-white border"
+          style="min-height: 280px; cursor: pointer; transition: all 0.3s ease"
+          data-bs-toggle="modal"
+          data-bs-target="#serviceModal{{ service.id }}"
+        >
+          <div
+            class="card-body position-relative z-1 d-flex flex-column justify-content-between p-4 h-100"
+            style="min-height: 280px"
+          >
+            <div>
+              <h4 class="fw-bold mb-2 text-dark">{{ service.title }}</h4>
+              <p class="small text-muted mb-0">
+                {{ service.short_description }}
+              </p>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <span
+                class="rounded-circle d-flex align-items-center justify-content-center bg-primary text-white fw-bold shadow-sm"
+                style="width: 40px; height: 40px; font-size: 14px"
+              >
+                {{ forloop.counter|stringformat:"02d" }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="serviceModal{{ service.id }}"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div
+            class="modal-content rounded-4 border-0 p-4 shadow-lg"
+            style="background: #ffffff"
+          >
+            <div class="modal-header border-0 pb-0">
+              <button
+                type="button"
+                class="btn-close shadow-none"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <div class="modal-body px-4 pb-4">
+              <div class="text-center mb-4">
+                <span
+                  class="text-uppercase text-primary fw-bold small tracking-widest px-3 py-1 rounded-pill bg-light border"
+                  >SERVICE MODULE</span
+                >
+                <h2 class="fw-bold mt-3 text-dark">{{ service.title }}</h2>
+              </div>
+
+              <ul class="list-unstyled mb-4">
+                {% if service.point_1 %}
+                <li
+                  class="d-flex align-items-center mb-3 bg-light p-3 rounded-3 border"
+                >
+                  <span class="me-3 text-success fs-5 fw-bold">✔</span>
+                  <div>
+                    <span class="text-dark fw-medium"
+                      >{{ service.point_1 }}</span
+                    >
+                    {% if service.point_1_description %}
+                    <p class="mb-0 text-muted small">
+                      {{ service.point_1_description }}
+                    </p>
+                    {% endif %}
+                  </div>
+                </li>
+                {% endif %} {% if service.point_2 %}
+                <li
+                  class="d-flex align-items-center mb-3 bg-light p-3 rounded-3 border"
+                >
+                  <span class="me-3 text-success fs-5 fw-bold">✔</span>
+                  <div>
+                    <span class="text-dark fw-medium"
+                      >{{ service.point_2 }}</span
+                    >
+                    {% if service.point_2_description %}
+                    <p class="mb-0 text-muted small">
+                      {{ service.point_2_description }}
+                    </p>
+                    {% endif %}
+                  </div>
+                </li>
+                {% endif %} {% if service.point_3 %}
+                <li
+                  class="d-flex align-items-center mb-3 bg-light p-3 rounded-3 border"
+                >
+                  <span class="me-3 text-success fs-5 fw-bold">✔</span>
+                  <div>
+                    <span class="text-dark fw-medium"
+                      >{{ service.point_3 }}</span
+                    >
+                    {% if service.point_3_description %}
+                    <p class="mb-0 text-muted small">
+                      {{ service.point_3_description }}
+                    </p>
+                    {% endif %}
+                  </div>
+                </li>
+                {% endif %} {% if service.point_4 %}
+                <li
+                  class="d-flex align-items-center mb-3 bg-light p-3 rounded-3 border"
+                >
+                  <span class="me-3 text-success fs-5 fw-bold">✔</span>
+                  <div>
+                    <span class="text-dark fw-medium"
+                      >{{ service.point_4 }}</span
+                    >
+                    {% if service.point_4_description %}
+                    <p class="mb-0 text-muted small">
+                      {{ service.point_4_description }}
+                    </p>
+                    {% endif %}
+                  </div>
+                </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section soft-section">
+  <div class="container">
+    <div class="split-heading">
+      <div>
+        <span class="eyebrow">OUR WORK</span>
+        <h2>Selected projects</h2>
+      </div>
+      <a href="{% url 'projects' %}" class="text-link"> View all projects → </a>
+    </div>
+
+    <div class="project-grid">
+      {% for project in projects %}
+      <article class="project-card">
+        <div class="project-image">
+          {% if project.image_url %}
+          <img src="{{ project.image_url }}" alt="{{ project.title }}" />
+          {% endif %}
+        </div>
+
+        <div class="project-body">
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.text }}</p>
+
+          {% if project.demo_link %}
+          <a
+            href="{{ project.demo_link }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+          >
+            Live Demo
+          </a>
+          {% else %}
+          <button class="btn btn-secondary btn-sm" disabled>
+            Demo Unavailable
+          </button>
+          {% endif %}
+        </div>
+      </article>
+      {% empty %}
+      <p>No projects available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 <section class="section soft-section">
   <div class="container">
@@ -1878,6 +2231,7 @@ document.addEventListener(
   </div>
 </section>
 
+<<<<<<< HEAD
 <!-- =====================================================
      BLOG
 ===================================================== -->
@@ -1955,6 +2309,32 @@ document.addEventListener(
      TEAM
 ===================================================== -->
 
+=======
+<section class="section soft-section">
+  <div class="container">
+    <div class="split-heading">
+      <div>
+        <span class="eyebrow">OUR BLOG</span>
+        <h2>Latest insights</h2>
+      </div>
+      <a href="{% url 'blog' %}" class="text-link">View all blog posts →</a>
+    </div>
+
+    <div class="blog-grid">
+      {% for blog in blogs %}
+      <div>
+        <h3>{{ blog.title }}</h3>
+        <p>{{ blog.text|truncatewords:20 }}</p>
+        <a href="{% url 'blog-detail' blog.id %}"> Read more → </a>
+      </div>
+      {% empty %}
+      <p>No blog posts available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 <section class="team-section team-showcase">
     <div class="container">
 
@@ -2012,7 +2392,11 @@ document.addEventListener(
 
                         <div class="team-card-actions">
                             {% if member.linkedin %}<a class="team-social-link" href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="{{ member.name }} on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5H3.25V19H6.5V8.5ZM4.88 3A1.88 1.88 0 1 0 4.88 6.75 1.88 1.88 0 0 0 4.88 3ZM19 12.98c0-3.16-1.68-4.63-3.93-4.63a3.39 3.39 0 0 0-3.08 1.69V8.5H8.75V19H12v-5.2c0-1.37.26-2.7 1.96-2.7 1.68 0 1.7 1.57 1.7 2.79V19H19v-6.02Z"/></svg></a>{% endif %}
+<<<<<<< HEAD
                             <a href="{% url 'team-detail' member.id %}" class="team-details-btn">See details <span>→</span></a>
+=======
+                            <a href="{% url 'team-detail' member.slug %}" class="team-details-btn">See details <span>→</span></a>
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
                         </div>
                     </div>
 
@@ -2033,4 +2417,18 @@ document.addEventListener(
         </div>
     </div>
 </section>
+<<<<<<< HEAD
 {% endblock %}
+=======
+
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <span class="eyebrow">HAVE A PROJECT?</span>
+      <h2>Let's build something useful together.</h2>
+    </div>
+    <a href="{% url 'contact' %}" class="btn btn-light">Contact Us →</a>
+  </div>
+</section>
+{% endblock %}
+>>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
