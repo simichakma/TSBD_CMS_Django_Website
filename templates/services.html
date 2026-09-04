@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Services | Team Solutions Bangladesh{% endblock %}
+
+{% block content %}
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">OUR SERVICES</span>
+    <h1>Professional Technology Solutions</h1>
+    <p>Expert guidance, strong systems, and reliable support for your business growth.</p>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section">
+  <div class="container">
+    <div class="card-grid three">
+      {% for service in services %}
+      <article class="service-card" id="service-{{ service.id }}">
+        <div class="service-icon">{{ service.number }}</div>
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </article>
+      {% empty %}
+      <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+        <p style="color: var(--muted); font-size: 16px;">No services are available right now.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); padding: 80px 20px; text-align: center;">
+  <div class="container">
+    <h2 style="color: var(--white); font-size: 36px; font-weight: 700; margin-bottom: 20px;">Ready to get started?</h2>
+    <p style="color: rgba(255, 255, 255, 0.9); font-size: 18px; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">Let's discuss how our services can help your business grow and succeed.</p>
+    <a href="{% url 'contact' %}" style="display: inline-block; background: var(--white); color: var(--primary); padding: 14px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: var(--transition);">
+      Get in Touch
+    </a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ blog.title }} | Team Solutions Bangladesh{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <a href="{% url 'blog' %}" class="text-link">← All blog posts</a>
+    <div class="section-heading" style="margin-top:24px">
+      <span class="eyebrow">BLOG</span>
+      <h1>{{ blog.title }}</h1>
+      <p>{{ blog.author }}{% if blog.created_at %} · {{ blog.created_at|date:"d M Y" }}{% endif %}</p>
+    </div>
+    {% if blog.short_description %}<p><strong>{{ blog.short_description }}</strong></p>{% endif %}
+    <div>{{ blog.content|linebreaks }}</div>
+  </div>
+</section>
+{% endblock %}

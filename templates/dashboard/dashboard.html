@@ -1,0 +1,157 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Dashboard | TSBD CMS{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="fw-bold mb-1">Dashboard Overview</h1>
+        <p class="text-muted mb-0">
+            Manage the public TSBD website content from here.
+        </p>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="row g-4 mb-4">
+
+    <!-- Services -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 stat-card p-4 text-center h-100">
+            <h5>Total Services</h5>
+
+            <div class="display-5 fw-bold">
+                {{ total_services }}
+            </div>
+
+            <a href="{% url 'service_list' %}"
+               class="btn btn-primary mt-2">
+                Manage Services
+            </a>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 stat-card p-4 text-center h-100">
+            <h5>Total Projects</h5>
+
+            <div class="display-5 fw-bold">
+                {{ total_projects }}
+            </div>
+
+            <a href="{% url 'project_list' %}"
+               class="btn btn-success mt-2">
+                Manage Projects
+            </a>
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 stat-card p-4 text-center h-100">
+            <h5>Total Products</h5>
+
+            <div class="display-5 fw-bold">
+                {{ total_products }}
+            </div>
+
+            <a href="{% url 'product-list' %}"
+               class="btn btn-warning mt-2">
+                Manage Products
+            </a>
+        </div>
+    </div>
+
+    <!-- Blog Posts -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 stat-card p-4 text-center h-100">
+            <h5>Total Blog Posts</h5>
+
+            <div class="display-5 fw-bold">
+                {{ total_blogs }}
+            </div>
+
+            <a href="{% url 'blog-list' %}"
+               class="btn btn-info mt-2">
+                Manage Blog
+            </a>
+        </div>
+    </div>
+
+    <!-- Team Members -->
+  <div class="col-md-4">
+    <div class="card shadow-sm border-0 stat-card p-4 text-center h-100">
+      <h5>Total Team Members</h5>
+
+      <div class="display-5 fw-bold">{{ total_team }}</div>
+
+      <a href="{% url 'team-list' %}" class="btn btn-success mt-2">
+        Manage Team
+      </a>
+    </div>
+  </div>
+
+    <!-- Messages -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 stat-card p-4 text-center h-100">
+            <h5>Total Messages</h5>
+
+            <div class="display-5 fw-bold">
+                {{ total_messages }}
+            </div>
+
+            <a href="{% url 'message_list' %}"
+               class="btn btn-dark mt-2">
+                View Messages
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Quick Actions -->
+<div class="card border-0 shadow-sm p-4">
+
+    <h4 class="mb-0">Quick Actions</h4>
+
+    <div class="d-flex flex-wrap gap-2 mt-3">
+
+        <a class="btn btn-primary"
+           href="{% url 'service_list' %}">
+            Add / Edit Service
+        </a>
+
+        <a class="btn btn-success"
+           href="{% url 'project_list' %}">
+            Add / Edit Project
+        </a>
+
+        <a class="btn btn-warning"
+           href="{% url 'product-list' %}">
+            Add / Edit Product
+        </a>
+
+        <a class="btn btn-info"
+           href="{% url 'blog-list' %}">
+            Add / Edit Blog
+        </a>
+
+        <a class="btn btn-dark"
+           href="{% url 'message_list' %}">
+            View Messages
+        </a>
+
+        <a class="btn btn-outline-dark"
+           href="{% url 'home' %}"
+           target="_blank">
+            Open Website
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

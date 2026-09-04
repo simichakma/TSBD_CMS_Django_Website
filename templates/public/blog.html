@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Blog | Team Solutions Bangladesh{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">OUR BLOG</span>
+      <h1>Latest insights</h1>
+    </div>
+    <div class="blog-grid">
+      {% for blog in blogs %}
+      <article class="blog-card">
+        <div class="blog-body">
+          <h3>{{ blog.title }}</h3>
+          <p>{{ blog.short_description|default:blog.text|truncatewords:35 }}</p>
+          <small>{{ blog.author }}{% if blog.created_at %} · {{ blog.created_at|date:"d M Y" }}{% endif %}</small>
+          <p><a class="text-link" href="{% url 'blog-detail' blog.id %}">Read more →</a></p>
+        </div>
+      </article>
+      {% empty %}
+      <p>No blog posts are available yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

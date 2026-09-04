@@ -1,0 +1,313 @@
+{% extends "dashboard/base.html" %} 
+{% load static %}
+{% block title %}TeamMembers Management{% endblock %} 
+{% block content %}
+
+<div class="container-fluid">
+  <!-- PAGE HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold mb-1">Team Members</h2>
+
+      <p class="text-muted mb-0">
+        Manage Team Solutions Bangladesh team members
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN ROW -->
+  <div class="row g-4">
+    <!-- =========================================
+             LEFT : TEAM FORM
+        ========================================== -->
+
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <h5 class="mb-0 fw-semibold" id="formTitle">Add Team Member</h5>
+        </div>
+
+        <div class="card-body">
+          <form method="POST" id="teamForm" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- HIDDEN ID -->
+
+            <input type="hidden" name="team_id" id="team_id" />
+
+            <!-- NAME -->
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Name </label>
+
+              <input
+                type="text"
+                name="name"
+                id="name"
+                class="form-control"
+                placeholder="Enter team member name"
+                required
+              />
+            </div>
+
+            <!-- DESIGNATION -->
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Designation </label>
+
+              <input
+                type="text"
+                name="designation"
+                id="designation"
+                class="form-control"
+                placeholder="Enter designation"
+              />
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Email </label>
+
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                placeholder="Enter email"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Phone </label>
+              <input type="tel" name="phone" id="phone" class="form-control" placeholder="Enter phone number" />
+            </div>
+
+            <!-- LINKEDIN -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> LinkedIn </label>
+              <input
+                type="url"
+                name="linkedin"
+                id="linkedin"
+                class="form-control"
+                placeholder="https://linkedin.com/..."
+              />
+            </div>
+
+            <!-- BIO -->
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Bio </label>
+
+              <textarea
+                name="bio"
+                id="bio"
+                class="form-control"
+                rows="5"
+                placeholder="Enter team member bio"
+              ></textarea>
+            </div>
+
+            <!-- IMAGE -->
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold"> Image </label>
+
+              <input
+                type="file"
+                name="image"
+                id="image"
+                class="form-control"
+                accept="image/*"
+              />
+            </div>
+
+            <!-- IMAGE PREVIEW -->
+
+            <div class="mb-3" id="imagePreview"></div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Public Profile URL</label>
+              <div class="input-group">
+                <input type="url" id="public_url" class="form-control" readonly placeholder="Generated automatically from name" />
+                <button class="btn btn-outline-secondary" type="button" id="copyUrlButton">Copy</button>
+              </div>
+              <small class="text-muted">Saved URL stays unchanged if the name is edited.</small>
+            </div>
+
+            <!-- STATUS -->
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold"> Status </label>
+
+              <select name="status" id="status" class="form-select">
+                <option value="1">Active</option>
+
+                <option value="0">Inactive</option>
+              </select>
+            </div>
+
+            <!-- BUTTONS -->
+
+            <button type="submit" class="btn btn-primary" id="saveButton">
+              Save Team Member
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================
+             RIGHT : TEAM LIST
+        ========================================== -->
+
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0 fw-semibold">Team Member List</h5>
+
+            <span class="badge bg-primary" id="teamCount">
+              {{ team_members|length }}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th>
+
+                  <th>Image</th>
+
+                  <th>Name</th>
+
+                  <th>Designation</th>
+
+                  <th>Email</th>
+
+                  <th>Phone</th>
+
+                  <th>Status</th>
+
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="teamTableBody">
+                {% for team in team_members %}
+
+                <tr>
+                  <!-- ID -->
+
+                  <td>{{ team.id }}</td>
+
+                  <!-- IMAGE -->
+
+                  <td>
+                    {% if team.image_url %}
+
+                    <img
+                      src="{{ team.image_url }}"
+                      width="55"
+                      height="55"
+                      style="
+                        width: 55px;
+                        height: 55px;
+                        object-fit: cover;
+                        border-radius: 8px;
+                      "
+                    />
+
+                    {% else %}
+
+                    <span class="text-muted"> No Image </span>
+
+                    {% endif %}
+                  </td>
+
+                  <!-- NAME -->
+
+                  <td>
+                    <strong> {{ team.name }} </strong>
+                  </td>
+
+                  <!-- DESIGNATION -->
+
+                  <td>{{ team.designation|default:"-" }}</td>
+
+                  <!-- EMAIL -->
+
+                  <td>{{ team.email|default:"-" }}</td>
+
+                  <td>{{ team.phone|default:"-" }}</td>
+
+                  <!-- STATUS -->
+
+                  <td>
+                    {% if team.status %}
+
+                    <span class="badge bg-success"> Active </span>
+
+                    {% else %}
+
+                    <span class="badge bg-secondary"> Inactive </span>
+
+                    {% endif %}
+                  </td>
+
+                  <!-- ACTION -->
+
+                  <td class="text-center">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-primary edit-team"
+                      data-id="{{ team.id }}"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-danger delete-team"
+                      data-id="{{ team.id }}"
+                      data-name="{{ team.name }}"
+                    >
+                      Delete
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary copy-team-url" data-url="{{ team.public_url }}">Copy URL</button>
+                  </td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                  <td colspan="8" class="text-center py-5">
+                    <div class="text-muted">
+                      <h6>No team members found</h6>
+
+                      <p class="mb-0">
+                        Add your first team member using the form.
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %} {% block extra_js %}
+
+<script src="{% static 'js/team/team.js' %}?v=2026082402"></script>
+
+{% endblock %}

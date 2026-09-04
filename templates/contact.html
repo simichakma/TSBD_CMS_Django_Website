@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Team Solutions Bangladesh{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">CONTACT US</span>
+        <h1>Let's start a conversation.</h1>
+        <p>Tell us what you are trying to build or improve.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container contact-grid">
+        <div class="contact-info">
+            <span class="eyebrow">GET IN TOUCH</span>
+            <h2>Have a project in mind?</h2>
+            <p>Send us a message and our team will get back to you.</p>
+
+            <div class="contact-item">
+                <strong>Email</strong>
+                <span>info@example.com</span>
+            </div>
+            <div class="contact-item">
+                <strong>Location</strong>
+                <span>Dhaka, Bangladesh</span>
+            </div>
+        </div>
+
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            <div class="form-row">
+                <div>
+                    <label for="name">Name *</label>
+                    <input id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email *</label>
+                    <input id="email" type="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone">
+                </div>
+                <div>
+                    <label for="subject">Subject</label>
+                    <input id="subject" name="subject">
+                </div>
+            </div>
+
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

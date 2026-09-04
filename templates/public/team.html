@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Team | Team Solutions Bangladesh{% endblock %}
+
+{% block content %}
+<section class="page-hero team-page-hero">
+  <div class="container">
+    <span class="eyebrow">OUR TEAM</span>
+    <h1>People behind the work.</h1>
+    <p>Meet the people who build and support our digital solutions.</p>
+  </div>
+</section>
+
+<section class="section team-showcase">
+  <div class="container">
+    <div class="team-grid">
+      {% for member in members %}
+      <article class="team-card">
+        <div class="team-image">
+          {% if member.image_url %}
+            <img src="{{ member.image_url }}" alt="{{ member.name }}" loading="lazy">
+          {% else %}
+            <div class="team-avatar" aria-label="Default user icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.33 0-8 2.67-8 5v3h16v-3c0-2.33-2.67-5-8-5Z"/></svg></div>
+          {% endif %}
+        </div>
+        <div class="team-body">
+          <h3>{{ member.name }}</h3>
+          {% if member.designation %}<p class="team-role">{{ member.designation }}</p>{% endif %}
+          <div class="team-card-contact">
+            {% if member.email %}<a href="mailto:{{ member.email }}" title="Email {{ member.name }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h16a2 2 0 0 0 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg><span>{{ member.email }}</span></a>{% endif %}
+            {% if member.phone %}<a href="tel:{{ member.phone }}" title="Call {{ member.name }}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20a1 1 0 0 1-1 1C10.61 21 3 13.39 3 4a1 1 0 0 1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z"/></svg><span>{{ member.phone }}</span></a>{% endif %}
+          </div>
+          <div class="team-card-actions">
+            {% if member.linkedin %}<a class="team-social-link" href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="{{ member.name }} on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5H3.25V19H6.5V8.5ZM4.88 3A1.88 1.88 0 1 0 4.88 6.75 1.88 1.88 0 0 0 4.88 3ZM19 12.98c0-3.16-1.68-4.63-3.93-4.63a3.39 3.39 0 0 0-3.08 1.69V8.5H8.75V19H12v-5.2c0-1.37.26-2.7 1.96-2.7 1.68 0 1.7 1.57 1.7 2.79V19H19v-6.02Z"/></svg></a>{% endif %}
+            <a class="team-details-btn" href="{% url 'team-detail' member.id %}">See details <span>→</span></a>
+          </div>
+        </div>
+      </article>
+      {% empty %}
+      <p class="text-muted">No team members are available right now.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

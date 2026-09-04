@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Team Member | Team Solutions Bangladesh{% endblock %}
+{% block content %}
+
+<main id="memberDetail" data-member-id="{{ member_id }}" data-api-url="{% url 'team-member-api' member_id %}">
+  <section class="member-detail-hero">
+    <div class="container">
+      <a class="member-back-link" href="{% url 'team' %}">← Back to our team</a>
+      <span class="eyebrow">MEET THE TEAM</span>
+    </div>
+  </section>
+
+  <section class="member-profile-section">
+    <div class="container team-detail">
+      <div class="member-portrait-wrap">
+        <div class="member-portrait-ring"><div class="team-detail-image" id="memberImage" aria-live="polite"></div></div>
+        <span class="member-portrait-dot" aria-hidden="true"></span>
+      </div>
+      <div class="team-detail-content">
+        <span class="member-label">TEAM MEMBER</span>
+        <h1 id="memberName">Loading profile…</h1>
+        <p id="memberDesignation" class="member-detail-role"></p>
+        <div class="member-rule" aria-hidden="true"></div>
+        <div class="member-contact-list">
+          <a id="memberEmailRow" class="member-contact-item" hidden><span class="member-contact-icon">✉</span><span><small>Email</small><strong id="memberEmail"></strong></span></a>
+          <a id="memberPhoneRow" class="member-contact-item" hidden><span class="member-contact-icon">☎</span><span><small>Phone</small><strong id="memberPhone"></strong></span></a>
+          <a id="memberLinkedinRow" class="member-contact-item" hidden target="_blank" rel="noopener noreferrer"><span class="member-contact-icon">in</span><span><small>LinkedIn</small><strong>View profile</strong></span></a>
+        </div>
+        <h2>About</h2>
+        <div id="memberBio" class="member-bio-full"></div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/team/member-detail.js' %}"></script>
+{% endblock %}

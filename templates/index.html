@@ -1,0 +1,2036 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Home |TeamSolutionsBangladesh
+{% endblock %} 
+{% block content %}
+
+<style>
+    .cursor {
+        display: inline-block;
+        color: #0066ff;
+        animation: blink 0.7s infinite;
+        font-weight: 300;
+    }
+
+    @keyframes blink {
+        0%, 100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0;
+        }
+    }
+
+    #dynamic-text {
+        color: #0066ff;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 14px 32px;
+
+        font-size: 16px;
+        font-weight: 600;
+
+        color: #ffffff !important;
+        text-decoration: none;
+
+        border-radius: 16px;
+
+        background:
+            linear-gradient(
+                180deg,
+                #258eff 0%,
+                #0066ff 60%,
+                #0052cc 100%
+            );
+
+        box-shadow:
+            0 12px 24px -6px
+            rgba(0, 102, 255, 0.5),
+
+            inset 0 2px 2px
+            rgba(255, 255, 255, 0.6),
+
+            inset 0 -3px 4px
+            rgba(0, 0, 0, 0.2);
+
+        transition:
+            all 0.25s
+            cubic-bezier(0.4, 0, 0.2, 1);
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.3);
+
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 18px 30px -4px
+            rgba(0, 102, 255, 0.65),
+
+            inset 0 3px 3px
+            rgba(255, 255, 255, 0.8),
+
+            inset 0 -3px 4px
+            rgba(0, 0, 0, 0.2);
+
+        filter: brightness(1.05);
+    }
+
+
+    /* =====================================================
+       HERO VISUAL
+    ===================================================== */
+
+    .ts-hero-visual {
+        position: relative;
+
+        min-height: 500px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        isolation: isolate;
+
+        overflow: visible !important;
+    }
+
+
+    /* =====================================================
+       ORBITS
+    ===================================================== */
+
+    .ts-orbit {
+        position: absolute;
+
+        border:
+            1px solid
+            rgba(21, 94, 239, 0.10);
+
+        border-radius: 50%;
+
+        pointer-events: none;
+
+        z-index: -3;
+    }
+
+    .ts-orbit-one {
+        width: 470px;
+        height: 470px;
+
+        animation:
+            tsOrbitRotate
+            22s
+            linear
+            infinite;
+    }
+
+    .ts-orbit-two {
+        width: 390px;
+        height: 390px;
+
+        border-style: dashed;
+
+        border-color:
+            rgba(21, 94, 239, 0.08);
+
+        animation:
+            tsOrbitRotateReverse
+            28s
+            linear
+            infinite;
+    }
+
+    @keyframes tsOrbitRotate {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes tsOrbitRotateReverse {
+        from {
+            transform: rotate(360deg);
+        }
+
+        to {
+            transform: rotate(0deg);
+        }
+    }
+
+
+    /* =====================================================
+       GLOW
+    ===================================================== */
+
+    .ts-glow {
+        position: absolute;
+
+        border-radius: 50%;
+
+        filter: blur(55px);
+
+        pointer-events: none;
+
+        z-index: -4;
+    }
+
+    .ts-glow-one {
+        width: 220px;
+        height: 220px;
+
+        top: 40px;
+        right: 30px;
+
+        background:
+            rgba(21, 94, 239, 0.12);
+
+        animation:
+            tsGlowMove
+            6s
+            ease-in-out
+            infinite;
+    }
+
+    .ts-glow-two {
+        width: 170px;
+        height: 170px;
+
+        bottom: 30px;
+        left: 30px;
+
+        background:
+            rgba(37, 142, 255, 0.09);
+
+        animation:
+            tsGlowMove
+            8s
+            ease-in-out
+            infinite reverse;
+    }
+
+    @keyframes tsGlowMove {
+        0%, 100% {
+            transform:
+                translate3d(
+                    0,
+                    0,
+                    0
+                );
+        }
+
+        50% {
+            transform:
+                translate3d(
+                    15px,
+                    -18px,
+                    0
+                );
+        }
+    }
+
+
+    /* =====================================================
+       MAIN SERVICES PANEL
+    ===================================================== */
+
+    .ts-services-panel {
+        position: relative;
+
+        z-index: 3;
+
+        width:
+            min(
+                100%,
+                570px
+            );
+
+        min-height: 430px;
+
+        padding: 0;
+
+        overflow: hidden;
+
+        border-radius: 28px;
+
+        background:
+            linear-gradient(
+                145deg,
+                rgba(255,255,255,0.96),
+                rgba(247,250,255,0.90)
+            );
+
+        border:
+            1px solid
+            rgba(255,255,255,0.95);
+
+        box-shadow:
+            0 35px 80px
+            rgba(16,24,40,0.13),
+
+            0 8px 25px
+            rgba(21,94,239,0.08),
+
+            inset 0 1px 0
+            rgba(255,255,255,0.95);
+
+        backdrop-filter:
+            blur(20px);
+
+        -webkit-backdrop-filter:
+            blur(20px);
+
+        transform:
+            perspective(1000px)
+            rotateY(-2deg);
+
+        transition:
+            transform 0.5s ease,
+            box-shadow 0.5s ease;
+    }
+
+    .ts-services-panel:hover {
+        transform:
+            perspective(1000px)
+            rotateY(0deg)
+            translateY(-5px);
+
+        box-shadow:
+            0 42px 90px
+            rgba(16,24,40,0.16),
+
+            0 10px 35px
+            rgba(21,94,239,0.11);
+    }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
+
+    .ts-services-header {
+        min-height: 82px;
+
+        padding: 0 25px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        background:
+            linear-gradient(
+                135deg,
+                #172b3f 0%,
+                #263f56 55%,
+                #304b63 100%
+            );
+
+        color: white;
+    }
+
+    .ts-services-title {
+        display: flex;
+
+        align-items: center;
+
+        gap: 13px;
+    }
+
+    .ts-live-dot {
+        width: 10px;
+        height: 10px;
+
+        flex: 0 0 10px;
+
+        border-radius: 50%;
+
+        background: #4dff9a;
+
+        box-shadow:
+            0 0 0 5px
+            rgba(77,255,154,0.12),
+
+            0 0 16px
+            rgba(77,255,154,0.55);
+
+        animation:
+            tsPulse
+            2s
+            infinite;
+    }
+
+    @keyframes tsPulse {
+        0%, 100% {
+            box-shadow:
+                0 0 0 5px
+                rgba(77,255,154,0.10),
+
+                0 0 12px
+                rgba(77,255,154,0.40);
+        }
+
+        50% {
+            box-shadow:
+                0 0 0 8px
+                rgba(77,255,154,0.03),
+
+                0 0 22px
+                rgba(77,255,154,0.70);
+        }
+    }
+
+    .ts-services-title strong {
+        display: block;
+
+        font-size: 17px;
+
+        font-weight: 800;
+    }
+
+    .ts-services-title small {
+        display: block;
+
+        margin-top: 2px;
+
+        color:
+            rgba(255,255,255,0.58);
+
+        font-size: 10px;
+    }
+
+    .ts-window-dots {
+        display: flex;
+
+        gap: 7px;
+    }
+
+    .ts-window-dots span {
+        width: 9px;
+        height: 9px;
+
+        border-radius: 50%;
+
+        background:
+            rgba(255,255,255,0.48);
+    }
+
+
+    /* =====================================================
+       SERVICES LIST
+    ===================================================== */
+
+    .ts-services-list {
+        padding:
+            8px 25px 0;
+    }
+
+    .ts-service-item {
+        display: grid;
+
+        grid-template-columns:
+            55px
+            1fr
+            35px;
+
+        align-items: center;
+
+        gap: 15px;
+
+        min-height: 78px;
+
+        padding:
+            12px 0;
+
+        border-bottom:
+            1px solid
+            #e7edf5;
+
+        transition:
+            transform 0.3s ease,
+            padding 0.3s ease;
+    }
+
+    .ts-service-item:last-child {
+        border-bottom: 0;
+    }
+
+    .ts-service-item:hover {
+        transform:
+            translateX(5px);
+
+        padding-left: 8px;
+    }
+
+    .ts-service-number {
+        width: 45px;
+        height: 45px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 14px;
+
+        color: #155eef;
+
+        background:
+            linear-gradient(
+                145deg,
+                #edf5ff,
+                #e3efff
+            );
+
+        font-size: 13px;
+
+        font-weight: 800;
+
+        transition:
+            all 0.3s ease;
+    }
+
+    .ts-service-item:hover
+    .ts-service-number {
+        color: white;
+
+        background:
+            linear-gradient(
+                145deg,
+                #258eff,
+                #155eef
+            );
+
+        transform:
+            rotate(-4deg)
+            scale(1.05);
+
+        box-shadow:
+            0 8px 18px
+            rgba(21,94,239,0.25);
+    }
+
+    .ts-service-content {
+        min-width: 0;
+    }
+
+    .ts-service-content strong {
+        display: block;
+
+        color: #24364b;
+
+        font-size: 15px;
+
+        font-weight: 800;
+
+        line-height: 1.3;
+    }
+
+    .ts-service-item:hover
+    .ts-service-content strong {
+        color: #155eef;
+    }
+
+    .ts-service-content span {
+        display: block;
+
+        margin-top: 4px;
+
+        color: #7b8798;
+
+        font-size: 11px;
+
+        line-height: 1.45;
+    }
+
+    .ts-service-arrow {
+        width: 30px;
+        height: 30px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 50%;
+
+        color: #98a2b3;
+
+        background: #f7f9fc;
+
+        font-size: 15px;
+
+        transition:
+            all 0.3s ease;
+    }
+
+    .ts-service-item:hover
+    .ts-service-arrow {
+        color: white;
+
+        background: #155eef;
+
+        transform:
+            translate(
+                3px,
+                -3px
+            );
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .ts-services-footer {
+        min-height: 57px;
+
+        margin: 0 25px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        border-top:
+            1px solid
+            #e7edf5;
+    }
+
+    .ts-footer-status {
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+    }
+
+    .ts-footer-status span {
+        width: 6px;
+        height: 6px;
+
+        border-radius: 50%;
+
+        background: #12b76a;
+    }
+
+    .ts-footer-status small {
+        color: #7b8798;
+
+        font-size: 10px;
+
+        font-weight: 600;
+    }
+
+    .ts-footer-label {
+        color: #a0a8b4;
+
+        font-size: 9px;
+
+        font-weight: 800;
+
+        letter-spacing: 1px;
+    }
+
+
+    /* =====================================================
+       FLOATING CARDS
+    ===================================================== */
+
+    .ts-floating-badge {
+        position: absolute;
+
+        z-index: 20;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        min-width: 150px;
+
+        padding:
+            12px 15px;
+
+        border-radius: 15px;
+
+        background:
+            rgba(
+                255,
+                255,
+                255,
+                0.94
+            );
+
+        border:
+            1px solid
+            rgba(
+                255,
+                255,
+                255,
+                0.98
+            );
+
+        box-shadow:
+            0 18px 40px
+            rgba(16,24,40,0.12),
+
+            0 4px 12px
+            rgba(21,94,239,0.06);
+
+        backdrop-filter:
+            blur(16px);
+
+        -webkit-backdrop-filter:
+            blur(16px);
+
+        animation:
+            tsFloat
+            5s
+            ease-in-out
+            infinite;
+
+        pointer-events: auto;
+    }
+
+    .ts-floating-badge:hover {
+        box-shadow:
+            0 25px 55px
+            rgba(16,24,40,0.17);
+    }
+
+    .ts-badge-icon {
+        width: 34px;
+        height: 34px;
+
+        flex:
+            0 0 34px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 10px;
+
+        color: #155eef;
+
+        background:
+            #edf5ff;
+
+        font-size: 10px;
+
+        font-weight: 900;
+    }
+
+    .ts-floating-badge strong {
+        display: block;
+
+        color: #24364b;
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        line-height: 1.2;
+    }
+
+    .ts-floating-badge small {
+        display: block;
+
+        margin-top: 3px;
+
+        color: #98a2b3;
+
+        font-size: 9px;
+
+        line-height: 1.2;
+    }
+
+
+    /* =====================================================
+       01 SOFTWARE
+       TOP LEFT OUTSIDE
+    ===================================================== */
+
+    .ts-badge-software {
+        top: 28px;
+
+        left: -45px;
+
+        animation-delay: -1s;
+    }
+
+
+    /* =====================================================
+       02 WEB
+       RIGHT SIDE OUTSIDE
+    ===================================================== */
+
+    .ts-badge-web {
+        right: -45px;
+
+        bottom: 80px;
+
+        animation-delay: -2.5s;
+    }
+
+
+    /* =====================================================
+       03 IT
+       BOTTOM LEFT OUTSIDE
+    ===================================================== */
+
+    .ts-badge-it {
+        left: -30px;
+
+        bottom: -20px;
+
+        min-width: 140px;
+
+        animation-delay: -4s;
+    }
+
+
+    /* =====================================================
+       04 MARKETING
+       TOP RIGHT OUTSIDE
+    ===================================================== */
+
+    .ts-badge-marketing {
+        top: -30px;
+
+        right: -42px;
+
+        min-width: 170px;
+
+        animation-delay: -3.2s;
+    }
+
+
+    @keyframes tsFloat {
+        0%, 100% {
+            transform:
+                translateY(0);
+        }
+
+        50% {
+            transform:
+                translateY(-9px);
+        }
+    }
+
+
+    /* =====================================================
+       DIGITAL LABEL
+    ===================================================== */
+
+    .ts-mini-label {
+        position: absolute;
+
+        top: 3px;
+
+        right: 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        color: #8b98aa;
+
+        font-size: 8px;
+
+        font-weight: 800;
+
+        letter-spacing: 1.4px;
+    }
+
+    .ts-mini-label span {
+        width: 5px;
+        height: 5px;
+
+        border-radius: 50%;
+
+        background: #155eef;
+
+        box-shadow:
+            0 0 8px
+            rgba(21,94,239,0.45);
+    }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media (max-width: 800px) {
+
+        .ts-hero-visual {
+            min-height: 510px;
+
+            margin-top: 25px;
+
+            padding:
+                30px 0 35px;
+
+            overflow: visible !important;
+        }
+
+        .ts-services-panel {
+            width: 100%;
+
+            min-height: 400px;
+
+            border-radius: 22px;
+
+            transform: none;
+        }
+
+        .ts-services-header {
+            min-height: 72px;
+
+            padding:
+                0 18px;
+        }
+
+        .ts-services-title strong {
+            font-size: 14px;
+        }
+
+        .ts-services-title small {
+            font-size: 9px;
+        }
+
+        .ts-services-list {
+            padding:
+                5px 18px 0;
+        }
+
+        .ts-service-item {
+            grid-template-columns:
+                43px
+                1fr
+                28px;
+
+            gap: 10px;
+
+            min-height: 72px;
+
+            padding:
+                10px 0;
+        }
+
+        .ts-service-number {
+            width: 39px;
+            height: 39px;
+
+            border-radius: 11px;
+
+            font-size: 11px;
+        }
+
+        .ts-service-content strong {
+            font-size: 12px;
+        }
+
+        .ts-service-content span {
+            font-size: 9px;
+        }
+
+        .ts-service-arrow {
+            width: 25px;
+            height: 25px;
+
+            font-size: 12px;
+        }
+
+        .ts-floating-badge {
+            min-width: 112px;
+
+            padding:
+                9px 10px;
+
+            gap: 7px;
+
+            border-radius: 11px;
+        }
+
+        .ts-badge-icon {
+            width: 27px;
+            height: 27px;
+
+            flex-basis: 27px;
+
+            border-radius: 8px;
+
+            font-size: 8px;
+        }
+
+        .ts-floating-badge strong {
+            font-size: 9px;
+        }
+
+        .ts-floating-badge small {
+            font-size: 7px;
+        }
+
+        .ts-badge-software {
+            top: 8px;
+            left: -5px;
+        }
+
+        .ts-badge-marketing {
+            top: 8px;
+            right: -5px;
+
+            min-width: 120px;
+        }
+
+        .ts-badge-web {
+            right: -5px;
+            bottom: 72px;
+        }
+
+        .ts-badge-it {
+            left: 5px;
+            bottom: 3px;
+        }
+
+        .ts-mini-label {
+            display: none;
+        }
+
+        .ts-orbit-one {
+            width: 360px;
+            height: 360px;
+        }
+
+        .ts-orbit-two {
+            width: 310px;
+            height: 310px;
+        }
+    }
+
+
+    /* =====================================================
+       VERY SMALL MOBILE
+    ===================================================== */
+
+    @media (max-width: 480px) {
+
+        .ts-hero-visual {
+            min-height: 500px;
+        }
+
+        .ts-services-panel {
+            min-height: 385px;
+        }
+
+        .ts-services-header {
+            min-height: 65px;
+        }
+
+        .ts-service-item {
+            min-height: 68px;
+
+            grid-template-columns:
+                38px
+                1fr
+                23px;
+        }
+
+        .ts-service-number {
+            width: 35px;
+            height: 35px;
+        }
+
+        .ts-service-content strong {
+            font-size: 10px;
+        }
+
+        .ts-service-content span {
+            font-size: 8px;
+        }
+
+        .ts-service-arrow {
+            width: 22px;
+            height: 22px;
+        }
+
+        .ts-floating-badge {
+            transform:
+                scale(0.85);
+        }
+
+        .ts-badge-software {
+            left: -18px;
+        }
+
+        .ts-badge-marketing {
+            right: -18px;
+        }
+
+        .ts-badge-web {
+            right: -18px;
+        }
+
+        .ts-badge-it {
+            left: -15px;
+        }
+    }
+</style>
+
+
+<script>
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const words = [
+            "a better tomorrow.",
+            "your business growth.",
+            "digital success.",
+            "modern web apps."
+        ];
+
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        const dynamicText =
+            document.getElementById(
+                "dynamic-text"
+            );
+
+
+        function typeEffect() {
+
+            const currentWord =
+                words[wordIndex];
+
+
+            if (isDeleting) {
+
+                dynamicText.textContent =
+                    currentWord.substring(
+                        0,
+                        charIndex - 1
+                    );
+
+                charIndex--;
+
+            } else {
+
+                dynamicText.textContent =
+                    currentWord.substring(
+                        0,
+                        charIndex + 1
+                    );
+
+                charIndex++;
+            }
+
+
+            let typeSpeed =
+                isDeleting
+                    ? 50
+                    : 100;
+
+
+            if (
+                !isDeleting &&
+                charIndex ===
+                currentWord.length
+            ) {
+
+                typeSpeed = 2000;
+
+                isDeleting = true;
+
+            }
+
+            else if (
+                isDeleting &&
+                charIndex === 0
+            ) {
+
+                isDeleting = false;
+
+                wordIndex =
+                    (wordIndex + 1)
+                    % words.length;
+
+                typeSpeed = 500;
+            }
+
+
+            setTimeout(
+                typeEffect,
+                typeSpeed
+            );
+        }
+
+
+        typeEffect();
+
+    }
+);
+</script>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="container hero-grid">
+
+
+        <!-- LEFT -->
+        <div class="hero-content">
+
+            <span class="eyebrow">
+                TECHNOLOGY • INNOVATION • SOLUTIONS
+            </span>
+
+
+            <h1>
+
+                Smart technology
+                solutions for
+
+                <span id="dynamic-text"></span>
+
+                <span class="cursor">
+                    |
+                </span>
+
+            </h1>
+
+
+            <p>
+                We create reliable websites,
+                software systems and customized
+                digital solutions that help
+                organizations work smarter.
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a
+                    href="{% url 'services' %}"
+                    class="btn btn-primary"
+                >
+                    Services
+                </a>
+
+
+                <a
+                    href="{% url 'contact' %}"
+                    class="btn btn-outline"
+                >
+                    Let's Talk
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT PREMIUM VISUAL
+        ================================================== -->
+
+        <div class="hero-card ts-hero-visual">
+
+
+            <!-- DECORATIVE -->
+            <div
+                class="ts-orbit ts-orbit-one"
+            ></div>
+
+            <div
+                class="ts-orbit ts-orbit-two"
+            ></div>
+
+            <div
+                class="ts-glow ts-glow-one"
+            ></div>
+
+            <div
+                class="ts-glow ts-glow-two"
+            ></div>
+
+
+            <!-- =================================================
+                 MAIN BOX
+            ================================================== -->
+
+            <div class="ts-services-panel">
+
+
+                <!-- HEADER -->
+
+                <div class="ts-services-header">
+
+                    <div class="ts-services-title">
+
+                        <span
+                            class="ts-live-dot"
+                        ></span>
+
+
+                        <div>
+
+                            <strong>
+                                Company Services
+                            </strong>
+
+                            <small>
+                                Digital solutions
+                                for business
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="ts-window-dots"
+                    >
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SERVICES -->
+
+                <div class="ts-services-list">
+
+
+                    <!-- 01 -->
+
+                    <div
+                        class="ts-service-item"
+                    >
+
+                        <div
+                            class="ts-service-number"
+                        >
+                            01
+                        </div>
+
+
+                        <div
+                            class="ts-service-content"
+                        >
+
+                            <strong>
+                                Software Development
+                            </strong>
+
+                            <span>
+                                ERP, dashboards,
+                                automation &
+                                business systems.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="ts-service-arrow"
+                        >
+                            ↗
+                        </div>
+
+                    </div>
+
+
+                    <!-- 02 -->
+
+                    <div
+                        class="ts-service-item"
+                    >
+
+                        <div
+                            class="ts-service-number"
+                        >
+                            02
+                        </div>
+
+
+                        <div
+                            class="ts-service-content"
+                        >
+
+                            <strong>
+                                Website Design &
+                                Development
+                            </strong>
+
+                            <span>
+                                Modern responsive
+                                websites and
+                                digital experiences.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="ts-service-arrow"
+                        >
+                            ↗
+                        </div>
+
+                    </div>
+
+
+                    <!-- 03 -->
+
+                    <div
+                        class="ts-service-item"
+                    >
+
+                        <div
+                            class="ts-service-number"
+                        >
+                            03
+                        </div>
+
+
+                        <div
+                            class="ts-service-content"
+                        >
+
+                            <strong>
+                                Training & IT
+                                Consultation
+                            </strong>
+
+                            <span>
+                                Professional guidance,
+                                training and
+                                technical support.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="ts-service-arrow"
+                        >
+                            ↗
+                        </div>
+
+                    </div>
+
+
+                    <!-- 04 -->
+
+                    <div
+                        class="ts-service-item"
+                    >
+
+                        <div
+                            class="ts-service-number"
+                        >
+                            04
+                        </div>
+
+
+                        <div
+                            class="ts-service-content"
+                        >
+
+                            <strong>
+                                Affiliate Marketing
+                            </strong>
+
+                            <span>
+                                Online sales support
+                                and digital business
+                                promotion.
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="ts-service-arrow"
+                        >
+                            ↗
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOOTER -->
+
+                <div class="ts-services-footer">
+
+                    <div
+                        class="ts-footer-status"
+                    >
+
+                        <span></span>
+
+                        <small>
+                            Available for new projects
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        class="ts-footer-label"
+                    >
+                        TS / 2026
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FLOATING 01
+            ================================================== -->
+
+            {% comment %} <div
+                class="
+                    ts-floating-badge
+                    ts-badge-software
+                "
+            >
+
+                <span
+                    class="ts-badge-icon"
+                >
+                    01
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        Software
+                    </strong>
+
+                    <small>
+                        Custom systems
+                    </small>
+
+                </div>
+
+            </div> {% endcomment %}
+
+
+            <!-- =================================================
+                 FLOATING 02
+            ================================================== -->
+
+            {% comment %} <div
+                class="
+                    ts-floating-badge
+                    ts-badge-web
+                "
+            >
+
+                <span
+                    class="ts-badge-icon"
+                >
+                    02
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        Web
+                    </strong>
+
+                    <small>
+                        Modern experiences
+                    </small>
+
+                </div>
+
+            </div> {% endcomment %}
+
+
+            <!-- =================================================
+                 FLOATING 03
+            ================================================== -->
+
+            {% comment %} <div
+                class="
+                    ts-floating-badge
+                    ts-badge-it
+                "
+            >
+
+                <span
+                    class="ts-badge-icon"
+                >
+                    03
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        IT
+                    </strong>
+
+                    <small>
+                        Smart solutions
+                    </small>
+
+                </div>
+
+            </div> {% endcomment %}
+
+
+            <!-- =================================================
+                 FLOATING 04
+                 NEW MARKETING
+            ================================================== -->
+
+            {% comment %} <div
+                class="
+                    ts-floating-badge
+                    ts-badge-marketing
+                "
+            >
+
+                <span
+                    class="ts-badge-icon"
+                >
+                    04
+                </span>
+
+
+                <div>
+
+                    <strong>
+                        Marketing
+                    </strong>
+
+                    <small>
+                        Digital growth
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- LABEL -->
+
+            <div class="ts-mini-label">
+
+                <span></span>
+
+                DIGITAL / SOLUTIONS
+
+            </div>
+
+
+        </div>
+
+    </div> {% endcomment %}
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+<section class="tsbd-services-section py-5">
+    <div class="container">
+        <div class="row align-items-end mb-5">
+            <div class="col-lg-7">
+                <span class="tsbd-eyebrow">WHAT WE DO</span>
+                <h2 class="tsbd-services-heading">Our Core Services</h2>
+                <p class="tsbd-services-lead">Technology solutions built around your organization's needs.</p>
+            </div>
+            <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+                <a href="{% url 'services' %}" class="tsbd-view-all">View All Services <span>→</span></a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            {% for service in services %}
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <a href="{% url 'service-detail' service.id %}" class="tsbd-service-card-link">
+                    <article class="tsbd-service-card">
+                        <div class="tsbd-service-number">{{ service.number }}</div>
+                        <div class="tsbd-service-card-content">
+                            <span class="tsbd-service-label">SERVICE MODULE</span>
+                            <h3>{{ service.title }}</h3>
+                            <p>{{ service.description|truncatechars:125 }}</p>
+                            <span class="tsbd-service-more">Explore Service <span>↗</span></span>
+                        </div>
+                    </article>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12"><div class="alert alert-light border">No services are currently available.</div></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<!-- =====================================================
+     PROJECTS
+===================================================== -->
+
+<section class="section soft-section tsbd-entity-section" id="projects">
+
+    <div class="container">
+
+        <div class="split-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    OUR WORK
+                </span>
+
+                <h2>
+                    Selected projects
+                </h2>
+
+            </div>
+
+
+            <a
+                href="{% url 'projects' %}"
+                class="text-link"
+            >
+                View all projects →
+            </a>
+
+        </div>
+
+
+        <div class="project-grid">
+
+            {% for project in projects %}
+
+            <article class="project-card tsbd-service-card tsbd-entity-card">
+
+                <div class="project-image">
+
+                    {% if project.image_url %}
+
+                    <img
+                        src="{{ project.image_url }}"
+                        alt="{{ project.title }}"
+                        loading="lazy"
+                    >
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="project-body">
+
+                    <h3>
+                        {{ project.title }}
+                    </h3>
+
+
+                    <p>
+                        {{ project.text }}
+                    </p>
+
+
+                    {% if project.demo_link %}
+
+                    <a
+                        href="{{ project.demo_link }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="
+                            btn
+                            btn-primary
+                            btn-sm
+                        "
+                    >
+                        Live Demo
+                    </a>
+
+                    {% else %}
+
+                    <button
+                        class="
+                            btn
+                            btn-secondary
+                            btn-sm
+                        "
+                        disabled
+                    >
+                        Demo Unavailable
+                    </button>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+
+            {% empty %}
+
+            <p>
+                No projects available.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+===================================================== -->
+
+<section class="section soft-section">
+  <div class="container">
+    <div class="split-heading">
+      <div>
+        <span class="eyebrow">OUR PRODUCTS</span>
+        <h2>Featured products</h2>
+      </div>
+      <a href="{% url 'products' %}" class="text-link">View all products →</a>
+    </div>
+
+    <div class="product-grid">
+      {% for product in products %}
+      <article class="product-card">
+        <div class="product-image">
+          {% if product.image_url %}
+          <img
+            src="{{ product.image_url }}"
+            alt="{{ product.product_name }}"
+            loading="lazy"
+          />
+          {% else %}
+          <div class="product-placeholder">TS</div>
+          {% endif %}
+        </div>
+        <div class="product-body">
+          <h3>{{ product.product_name }}</h3>
+          <p>{{ product.product_details|truncatewords:20 }}</p>
+          <a class="text-link" href="{% url 'product-detail' product.id %}"
+            >View product →</a
+          >
+        </div>
+      </article>
+      {% empty %}
+      <p>No products available.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================
+     BLOG
+===================================================== -->
+
+<section class="section soft-section">
+
+    <div class="container">
+
+        <div class="split-heading">
+
+            <div>
+
+                <span class="eyebrow">
+                    OUR BLOG
+                </span>
+
+                <h2>
+                    Latest insights
+                </h2>
+
+            </div>
+
+
+            <a
+                href="{% url 'blog' %}"
+                class="text-link"
+            >
+                View all blog posts →
+            </a>
+
+        </div>
+
+
+        <div class="blog-grid">
+
+            {% for blog in blogs %}
+
+            <div>
+
+                <h3>
+                    {{ blog.title }}
+                </h3>
+
+
+                <p>
+                    {{ blog.text|truncatewords:20 }}
+                </p>
+
+
+                <a
+                    href="{% url 'blog-detail' blog.id %}"
+                >
+                    Read more →
+                </a>
+
+            </div>
+
+
+            {% empty %}
+
+            <p>
+                No blog posts available.
+            </p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TEAM
+===================================================== -->
+
+<section class="team-section team-showcase">
+    <div class="container">
+
+        <div class="team-title">
+            <h1>Our Team</h1>
+
+            <p>
+                Meet the talented people behind
+                Team Solutions Bangladesh.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            {% for member in team %}
+
+            <div class="col-lg-4 col-md-6">
+                <div class="team-card">
+
+                    <div class="team-image">
+                        {% if member.image_url %}
+                            <img
+                                src="{{ member.image_url }}"
+                                alt="{{ member.name }}"
+                            >
+                        {% else %}
+                            <div class="team-avatar" aria-label="Default user icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5.33 0-8 2.67-8 5v3h16v-3c0-2.33-2.67-5-8-5Z"/></svg></div>
+                        {% endif %}
+                    </div>
+
+                    <div class="team-body">
+                        <h4>
+                            {{ member.name }}
+                        </h4>
+
+                        {% if member.designation %}
+                            <div class="designation">
+                                {{ member.designation }}
+                            </div>
+                        {% endif %}
+
+                        {% if member.email %}
+                            <p class="team-email">
+                                <strong>Email:</strong>
+
+                                <a href="mailto:{{ member.email }}">
+                                    {{ member.email }}
+                                </a>
+                            </p>
+                        {% endif %}
+
+                        {% if member.phone %}
+                            <p class="team-email"><strong>Phone:</strong> <a href="tel:{{ member.phone }}">{{ member.phone }}</a></p>
+                        {% endif %}
+
+                        <div class="team-card-actions">
+                            {% if member.linkedin %}<a class="team-social-link" href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="{{ member.name }} on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5H3.25V19H6.5V8.5ZM4.88 3A1.88 1.88 0 1 0 4.88 6.75 1.88 1.88 0 0 0 4.88 3ZM19 12.98c0-3.16-1.68-4.63-3.93-4.63a3.39 3.39 0 0 0-3.08 1.69V8.5H8.75V19H12v-5.2c0-1.37.26-2.7 1.96-2.7 1.68 0 1.7 1.57 1.7 2.79V19H19v-6.02Z"/></svg></a>{% endif %}
+                            <a href="{% url 'team-detail' member.id %}" class="team-details-btn">See details <span>→</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+                <div class="no-team text-center py-5">
+                    <h4>No team members available.</h4>
+                    <p>Team information will be available soon.</p>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}

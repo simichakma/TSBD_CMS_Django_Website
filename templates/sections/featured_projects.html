@@ -1,0 +1,37 @@
+<!-- Featured Projects Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">SELECTED WORK</span>
+      <h2>Our Latest Projects</h2>
+      <p>Showcase of successful digital solutions delivered to satisfied clients</p>
+    </div>
+    
+    <div class="featured-projects-grid" style="display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); margin-top: 48px;">
+      {% for project in featured_projects %}
+      <div class="featured-project-card">
+        <div class="featured-project-image">
+          {% if project.image_url %}
+            <img src="{{ project.image_url }}" alt="{{ project.title }}">
+          {% else %}
+            <div style="background: linear-gradient(135deg, var(--light) 0%, #f0f4f8 100%); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+              <span style="color: var(--muted);">Project Image</span>
+            </div>
+          {% endif %}
+          <div class="featured-project-overlay">
+            <h4>{{ project.title }}</h4>
+            <p>{{ project.text|truncatewords:15 }}</p>
+          </div>
+        </div>
+        <div class="featured-project-body">
+          {% if project.service_name %}
+            <span class="featured-project-tag">{{ project.service_name }}</span>
+          {% endif %}
+          <h3>{{ project.title }}</h3>
+          <p>{{ project.text }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,206 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+            <h3 class="fw-bold">
+
+                {% if blog %}
+                    Edit Blog
+                {% else %}
+                    Add Blog
+                {% endif %}
+
+            </h3>
+
+            <p class="text-muted">
+                Manage your blog posts
+            </p>
+
+        </div>
+
+
+        <a
+            href="{% url 'blog-list' %}"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <form
+                method="POST"
+                id="blogForm"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- Title -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Blog Title
+                    </label>
+
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        class="form-control"
+                        placeholder="Enter blog title"
+                        value="{% if blog %}{{ blog.1 }}{% endif %}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Short Description -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Short Description
+                    </label>
+
+                    <textarea
+                        name="short_description"
+                        id="short_description"
+                        class="form-control"
+                        rows="3"
+                    >{% if blog %}{{ blog.3 }}{% endif %}</textarea>
+
+                </div>
+
+
+                <!-- Content -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Content
+                    </label>
+
+                    <textarea
+                        name="content"
+                        id="content"
+                        class="form-control"
+                        rows="8"
+                        placeholder="Write blog content..."
+                    >{% if blog %}{{ blog.4 }}{% endif %}</textarea>
+
+                </div>
+
+
+                <!-- Author -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Author
+                    </label>
+
+                    <input
+                        type="text"
+                        name="author"
+                        id="author"
+                        class="form-control"
+                        value="{% if blog %}{{ blog.5 }}{% endif %}"
+                        placeholder="Author name"
+                    >
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div class="mb-3">
+
+                    <label class="form-label fw-semibold">
+                        Status
+                    </label>
+
+                    <select
+                        name="status"
+                        id="status"
+                        class="form-select"
+                    >
+
+                        <option
+                            value="1"
+                            {% if blog and blog.6 == 1 %}
+                                selected
+                            {% elif not blog %}
+                                selected
+                            {% endif %}
+                        >
+                            Active
+                        </option>
+
+                        <option
+                            value="0"
+                            {% if blog and blog.6 == 0 %}
+                                selected
+                            {% endif %}
+                        >
+                            Inactive
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+
+                    {% if blog %}
+                        Update Blog
+                    {% else %}
+                        Save Blog
+                    {% endif %}
+
+                </button>
+
+
+                <a
+                    href="{% url 'blog-list' %}"
+                    class="btn btn-light"
+                >
+                    Cancel
+                </a>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="{% static "js/blog/blog.js" %}"></script>
+
+{% endblock %}

@@ -1,0 +1,1152 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{% block title %}Team Solutions Bangladesh{% endblock %}</title>
+
+    <meta
+      name="description"
+      content="Team Solutions Bangladesh - Technology, software and business solutions."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+
+    <!-- Flip Card Animation CSS -->
+    <style>
+
+      /* =========================================================
+         FOOTER MAIN TEXT / LINKS
+      ========================================================= */
+
+      .tsbd-footer-main {
+        background-color: #f8f9fa;
+        color: #1a1a1a;
+      }
+
+      .tsbd-footer-grid {
+        color: #333333;
+      }
+
+      .tsbd-footer-company {
+        color: #333333;
+      }
+
+      .tsbd-footer-company p {
+        color: #555555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .tsbd-footer-main h4 {
+        color: #1a1a1a;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .tsbd-footer-main a {
+        color: #333333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .tsbd-footer-main a:hover {
+        color: #667eea;
+        text-decoration: underline;
+      }
+
+
+      /* =========================================================
+         FOOTER CONTACT INFORMATION
+      ========================================================= */
+          .tsbd-footer-grid {
+            align-items: start;
+          }
+
+          .tsbd-footer-contact-info {
+            align-self: start;
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+          }
+
+          /* Supports the original:
+            <div style="margin-bottom: 25px; text-align: center;"> */
+          .tsbd-footer-contact-info > div[style*="margin-bottom"] {
+            margin-bottom: 9px !important;
+          }
+
+          .tsbd-footer-contact-info .contact-flip-shell {
+            margin-bottom: 9px;
+          }
+
+          /* Small, balanced contact rail. */
+          .tsbd-footer-contact-info .footer-flip-rail-large {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: max-content;
+            max-width: 100%;
+            padding: 8px 12px;
+            border: 1px solid rgba(83, 111, 220, 0.25);
+            border-radius: 19px;
+            background: linear-gradient(135deg, #f8faff 0%, #eef3ff 100%);
+            box-shadow: 0 8px 20px rgba(53, 79, 170, 0.12);
+          }
+
+          .tsbd-footer-contact-info .footer-flip-node-large {
+            flex: 0 0 42px;
+            width: 42px;
+            height: 42px;
+          }
+
+          .tsbd-footer-contact-info .footer-flip-front,
+          .tsbd-footer-contact-info .footer-flip-back {
+            border-radius: 10px;
+          }
+
+          .tsbd-footer-contact-info .footer-flip-front {
+            font-size: 1rem;
+          }
+
+          .tsbd-footer-contact-info .footer-flip-back svg {
+            width: 20px;
+            height: 20px;
+          }
+
+          /* Bring the text block up and keep its type consistent with the footer. */
+          .tsbd-footer-contact-info .contact-divider {
+            margin: 10px 0 12px;
+          }
+
+          .tsbd-footer-contact-info p,
+          .tsbd-footer-contact-info a:not(.footer-flip-node-large) {
+            font-size: 0.88rem;
+            line-height: 1.4;
+          }
+
+          /* Location/address text uses the same scale as the contact details. */
+          .tsbd-footer-contact-info .contact-location,
+          .tsbd-footer-contact-info .tsbd-footer-contact-location,
+          .tsbd-footer-contact-info address {
+            display: block;
+            margin-top: 10px;
+            color: #c9c9d5;
+            font-size: 0.88rem;
+            font-style: normal;
+            line-height: 1.45;
+          }
+
+          /* Prevent the theme from turning the location text white. */
+          .tsbd-footer-contact-info .contact-location,
+          .tsbd-footer-contact-info .contact-location *,
+          .tsbd-footer-contact-info .tsbd-footer-contact-location,
+          .tsbd-footer-contact-info .tsbd-footer-contact-location *,
+          .tsbd-footer-contact-info address,
+          .tsbd-footer-contact-info address * {
+            color: #2f343b !important;
+            -webkit-text-fill-color: #515e6f !important;
+            opacity: 1 !important;
+          }
+
+          /* Fallback for a location paragraph without a class. */
+          .tsbd-footer-contact-info > p:last-of-type,
+          .tsbd-footer-contact-info > p:last-of-type *,
+          .tsbd-footer-contact-info .location-text,
+          .tsbd-footer-contact-info .location-text * {
+            color: #566170 !important;
+            -webkit-text-fill-color: #5d697b !important;
+            opacity: 1 !important;
+          }
+
+          /* On small screens, keep a neat 4 + 3 arrangement. */
+          @media (max-width: 620px) {
+            .tsbd-footer-contact-info .footer-flip-rail-large {
+              flex-wrap: wrap;
+              gap: 7px;
+              width: min(100%, 260px);
+              max-width: 260px;
+              padding: 10px;
+              border-radius: 20px;
+            }
+
+            .tsbd-footer-contact-info .footer-flip-node-large {
+              flex-basis: 42px;
+              width: 42px;
+              height: 42px;
+            }
+          }
+
+      /* =========================================================
+         CONTACT FLIP CARD AREA
+      ========================================================= */
+
+      .contact-flip-shell {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 0 0 26px;
+      }
+
+
+      /* Main flip card rail */
+
+      .footer-flip-rail-large {
+        position: relative;
+
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+
+        gap: 6px;
+
+        width: max-content;
+        max-width: 100%;
+
+        padding: 16px 20px;
+
+        overflow-x: auto;
+        overflow-y: visible;
+
+        border: 1px solid rgba(83, 111, 220, 0.28);
+        border-radius: 32px;
+
+        background: linear-gradient(
+          135deg,
+          #f8faff 0%,
+          #eef3ff 100%
+        );
+
+        box-shadow:
+          0 16px 38px rgba(53, 79, 170, 0.14),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+        scrollbar-width: none;
+      }
+
+      .footer-flip-rail-large::-webkit-scrollbar {
+        display: none;
+      }
+
+
+      /* Individual flip card */
+
+      .footer-flip-node-large {
+        position: relative;
+
+        display: block;
+
+        flex: 0 0 64px;
+
+        width: 64px;
+        height: 64px;
+
+        padding: 0;
+
+        color: inherit;
+
+        perspective: 1000px;
+
+        text-decoration: none !important;
+      }
+
+
+      /* Flip card */
+
+      .footer-flip-card {
+        position: relative;
+
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        transform-style: preserve-3d;
+
+        transition:
+          transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+
+      /* Flip ONLY selected card */
+
+      .footer-flip-node-large:hover .footer-flip-card,
+      .footer-flip-node-large:focus-visible .footer-flip-card,
+      .footer-flip-node-large:active .footer-flip-card {
+        transform: rotateY(180deg);
+
+        transition-delay: var(--flip-delay, 0ms);
+      }
+
+
+      /* =========================================================
+         FRONT + BACK
+      ========================================================= */
+
+      .footer-flip-front,
+      .footer-flip-back {
+        position: absolute;
+
+        inset: 0;
+
+        display: grid;
+        place-items: center;
+
+        overflow: hidden;
+
+        border-radius: 15px;
+
+        backface-visibility: hidden;
+
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial,
+          sans-serif;
+
+        line-height: 1;
+      }
+
+
+      /* Front */
+
+      .footer-flip-front {
+        color: #ffffff;
+
+        background: linear-gradient(
+          145deg,
+          #4f72e8 0%,
+          #7350bd 100%
+        );
+
+        border: 1px solid rgba(255, 255, 255, 0.32);
+
+        font-size: 1.45rem;
+        font-weight: 900;
+
+        letter-spacing: 0.02em;
+
+        text-shadow:
+          0 2px 5px rgba(27, 39, 105, 0.24);
+
+        box-shadow:
+          0 9px 18px rgba(76, 88, 193, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      }
+
+
+      /* Back */
+
+      .footer-flip-back {
+        color: #ffffff;
+
+        background: linear-gradient(
+          145deg,
+          #183a9b 0%,
+          #315bd4 100%
+        );
+
+        border: 1px solid rgba(255, 255, 255, 0.34);
+
+        transform: rotateY(180deg);
+
+        box-shadow:
+          0 9px 20px rgba(30, 58, 138, 0.3);
+      }
+
+
+      /* SVG */
+
+      .footer-flip-back svg {
+        width: 30px;
+        height: 30px;
+
+        fill: none;
+
+        stroke: currentColor;
+
+        stroke-width: 1.8;
+
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+
+      /* =========================================================
+         HOVER LABEL
+      ========================================================= */
+
+      .footer-flip-node-large::before {
+        content: attr(data-label);
+
+        position: absolute;
+
+        left: 50%;
+
+        bottom: calc(100% + 13px);
+
+        z-index: 100;
+
+        min-width: max-content;
+
+        padding: 8px 11px;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+
+        border-radius: 8px;
+
+        background: #111827;
+
+        color: #ffffff;
+
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial,
+          sans-serif;
+
+        font-size: 0.78rem;
+
+        font-weight: 700;
+
+        line-height: 1.1;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform:
+          translate(-50%, 7px)
+          scale(0.92);
+
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease;
+
+        box-shadow:
+          0 7px 18px rgba(15, 23, 42, 0.22);
+      }
+
+
+      /* Label arrow */
+
+      .footer-flip-node-large::after {
+        content: "";
+
+        position: absolute;
+
+        left: 50%;
+
+        bottom: calc(100% + 7px);
+
+        z-index: 99;
+
+        width: 9px;
+        height: 9px;
+
+        background: #111827;
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform:
+          translate(-50%, 7px)
+          rotate(45deg)
+          scale(0.92);
+
+        transition:
+          opacity 0.18s ease,
+          transform 0.18s ease;
+      }
+
+
+      /* Show label */
+
+      .footer-flip-node-large:hover::before,
+      .footer-flip-node-large:focus-visible::before,
+      .footer-flip-node-large:active::before {
+        opacity: 1;
+
+        transform:
+          translate(-50%, 0)
+          scale(1);
+      }
+
+
+      /* Show arrow */
+
+      .footer-flip-node-large:hover::after,
+      .footer-flip-node-large:focus-visible::after,
+      .footer-flip-node-large:active::after {
+        opacity: 1;
+
+        transform:
+          translate(-50%, 0)
+          rotate(45deg)
+          scale(1);
+      }
+
+
+      /* Keyboard focus */
+
+      .footer-flip-node-large:focus-visible {
+        outline: 3px solid #f59e0b;
+
+        outline-offset: 4px;
+
+        border-radius: 16px;
+      }
+
+
+      /* =========================================================
+         DIVIDER
+      ========================================================= */
+
+      .contact-divider {
+        margin: 22px 0;
+
+        border: 0;
+
+        border-top:
+          1px solid #dbe3f4;
+      }
+
+
+      /* =========================================================
+         FOOTER BOTTOM
+      ========================================================= */
+      .tsbd-footer-bottom { background-color: #e8edf5; color: #333333; width: 100%; } 
+      
+      .tsbd-footer-bottom-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center; gap: 6px; padding: 14px 15px; } 
+      
+      .tsbd-footer-bottom p { color: #67719f; margin: 0; text-align: center; font-size: 0.9rem; line-height: 1.5; } 
+      .tsbd-footer-badge { display: block; color: #667eea; font-weight: 600; text-align: center; font-size: 0.85rem; line-height: 1.5; }
+
+
+
+      /* =========================================================
+         FOOTER BRAND
+      ========================================================= */
+
+       .tsbd-footer-brand {
+        color: #3b424a;
+      }
+
+      .tsbd-footer-brand span {
+        color: #34363f;
+      }
+
+      /* =========================================================
+         MOBILE
+      ========================================================= */
+
+      @media (max-width: 620px) {
+
+        .footer-flip-rail-large {
+          display: flex;
+
+          flex-wrap: wrap;
+
+          gap: 11px;
+
+          width: min(100%, 318px);
+
+          max-width: 318px;
+
+          padding: 15px;
+
+          overflow: visible;
+
+          border-radius: 25px;
+        }
+
+        .footer-flip-node-large {
+          flex: 0 0 58px;
+
+          width: 58px;
+          height: 58px;
+        }
+
+        .footer-flip-front,
+        .footer-flip-back {
+          border-radius: 13px;
+        }
+
+        .footer-flip-front {
+          font-size: 1.28rem;
+        }
+
+        .footer-flip-back svg {
+          width: 27px;
+          height: 27px;
+        }
+      }
+
+
+      /* =========================================================
+         REDUCED MOTION
+      ========================================================= */
+
+      @media (prefers-reduced-motion: reduce) {
+
+        .footer-flip-card,
+        .footer-flip-node-large::before,
+        .footer-flip-node-large::after {
+
+          transition-duration: 0.01ms;
+        }
+
+      }
+    </style>
+
+    {% block extra_css %}{% endblock %}
+  </head>
+
+  <body>
+    <!-- =========================
+         HEADER / NAVBAR
+    ========================== -->
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="brand">
+          <img
+            src="{% static 'images/logo.png' %}"
+            alt="Team Solutions Bangladesh"
+            class="site-logo"
+          />
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Toggle navigation"
+          type="button"
+        >
+          ☰
+        </button>
+
+        <!-- Main Navigation -->
+        <nav id="mainNav">
+          <!-- Home -->
+          <a
+            href="{% url 'home' %}"
+            class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
+          >
+            Home
+          </a>
+
+          <!-- =========================
+               SERVICES DROPDOWN
+          ========================== -->
+          <div class="nav-dropdown">
+            <a
+              href="{% url 'services' %}"
+              class="nav-link dropdown-toggle-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+            >
+              Services ▾
+            </a>
+
+            <div class="dropdown-menu">
+              {% for service in menu_services %}
+
+              <a href="{% url 'service-detail' service.0 %}">
+                {% if service.title %} {{ service.title }} {% elif service.name
+                %} {{ service.name }} {% else %} {{ service.1 }} {% endif %}
+              </a>
+
+              {% empty %}
+
+              <span class="dropdown-empty"> No services available </span>
+
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <a
+            href="{% url 'projects' %}"
+            class="nav-link {% if request.resolver_match.url_name == 'projects' %}active{% endif %}"
+          >
+            Projects
+          </a>
+
+          <!-- Products -->
+                <a
+                    href="{% url 'products' %}"
+                    class="nav-link {% if request.resolver_match.url_name == 'products' %}active{% endif %}"
+                >
+                    Products
+                </a>
+
+                
+          <!-- Blog -->
+          <a
+            href="{% url 'blog' %}"
+            class="nav-link {% if request.resolver_match.url_name == 'blog' %}active{% endif %}"
+          >
+            Blog
+          </a>
+
+          <!-- Team -->
+          <a
+            href="{% url 'team' %}"
+            class="nav-link {% if request.resolver_match.url_name == 'team' or request.resolver_match.url_name == 'team-detail' %}active{% endif %}"
+          >
+            Team
+          </a>
+
+          <!-- About Us -->
+          <a
+            href="{% url 'about' %}"
+            class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+          >
+            About Us
+          </a>
+
+          <!-- Contact Button -->
+          <button
+            type="button"
+            class="nav-btn btn btn-primary border-0"
+            data-bs-toggle="modal"
+            data-bs-target="#contactModal"
+          >
+            Contact Us
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- =========================
+       MAIN CONTENT
+  ========================== -->
+
+    <main>
+      ``` {% if messages %}
+
+      <div class="container messages my-3">
+        {% for message in messages %}
+
+        <div
+          class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+          role="alert"
+        >
+          {{ message }}
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      {% endif %} {% block content %} {% endblock %} ```
+    </main>
+
+    <!-- =========================
+       MAIN FOOTER
+  ========================== -->
+
+    <footer>
+      ```
+      <div class="tsbd-footer-main">
+        <div class="container">
+          <div class="tsbd-footer-grid">
+            <!-- =========================
+           COMPANY
+      ========================== -->
+            <div class="tsbd-footer-company">
+              <a href="{% url 'home' %}" class="tsbd-footer-brand">
+                <img
+                  src="{% static 'images/TS_logo.png' %}"
+                  alt="Team Solutions Bangladesh"
+                />
+
+                <span> Team Solutions Bangladesh </span>
+              </a>
+
+              <p>
+                Building practical digital solutions for organizations and
+                businesses.
+              </p>
+            </div>
+
+            <!-- =========================
+           QUICK LINKS
+      ========================== -->
+            <div>
+              <h4>Quick Links</h4>
+
+              <a href="{% url 'home' %}"> Home </a>
+
+              <a href="{% url 'about' %}"> About Us </a>
+
+              <a href="{% url 'services' %}"> Services </a>
+
+              <a href="{% url 'projects' %}"> Projects </a>
+
+              <a href="{% url 'products' %}"> Products </a>
+
+            </div>
+
+            <!-- =========================
+           OUR SERVICES
+      ========================== -->
+            <div>
+              <h4>Our Services</h4>
+
+              <a href="{% url 'services' %}"> Software Solution </a>
+
+              <a href="{% url 'services' %}"> Web Development </a>
+
+              <a href="{% url 'services' %}"> Software Development </a>
+
+              <a href="{% url 'services' %}"> Training &amp; Internship </a>
+
+              <a href="{% url 'services' %}"> Affiliate Marketing </a>
+            </div>
+
+            <!-- =========================
+           CONTACT US
+      ========================== -->
+            <div class="tsbd-footer-contact-info">
+              <!-- Flip Cards -->
+              <div class="contact-flip-shell">
+                <div
+                  class="footer-flip-rail-large"
+                  aria-label="Contact and social links"
+                >
+                  <!-- Email -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="Email"
+                    data-label="Email"
+                    href="mailto:tsbd@teamsolutionsbangladesh.com"
+                    style="--flip-delay: 0ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        C
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M3.5 6.5h17v11h-17v-11Zm1.4 1.6 7.1 5.1 7.1-5.1M5 16h14"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+
+                  <!-- Facebook -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="Facebook"
+                    data-label="Facebook"
+                    href="https://www.facebook.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="--flip-delay: 60ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        O
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M14 8h2V5h-2.4C10.9 5 10 6.7 10 8.8V11H8v3h2v6h3v-6h2.4l.6-3h-3V9c0-.7.3-1 1-1Z"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="Instagram"
+                    data-label="Instagram"
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="--flip-delay: 120ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        N
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M8 4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Zm4 5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.2-1.4h.1"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+
+                  <!-- YouTube -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="YouTube"
+                    data-label="YouTube"
+                    href="https://www.youtube.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="--flip-delay: 180ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        T
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M10 9v6l5-3-5-3Zm-6 3c0-3.3.3-4.8 1-5.5C5.8 5.7 8.3 5.5 12 5.5s6.2.2 7 1c.7.7 1 2.2 1 5.5s-.3 4.8-1 5.5c-.8.8-3.3 1-7 1s-6.2-.2-7-1c-.7-.7-1-2.2-1-5.5Z"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+
+                  <!-- X -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="X"
+                    data-label="X"
+                    href="https://x.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="--flip-delay: 240ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        A
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="m5 5 10.6 14H19L8.4 5H5Zm14 0-6.8 7.2M5 19l7.1-7.6"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+
+                  <!-- LinkedIn -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="LinkedIn"
+                    data-label="LinkedIn"
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="--flip-delay: 300ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        C
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M5 9h3v10H5V9Zm1.5-4a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4ZM11 9h3v1.4c.5-.9 1.5-1.7 3-1.7 2.4 0 3.5 1.6 3.5 4.4V19h-3v-5.3c0-1.4-.5-2.2-1.6-2.2-1.2 0-1.9.9-1.9 2.2V19h-3V9Z"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+
+                  <!-- WhatsApp -->
+                  <a
+                    class="footer-flip-node-large"
+                    aria-label="WhatsApp"
+                    data-label="WhatsApp"
+                    href="https://wa.me/8801718704000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="--flip-delay: 360ms"
+                  >
+                    <span class="footer-flip-card">
+                      <span class="footer-flip-front" aria-hidden="true">
+                        T
+                      </span>
+
+                      <span class="footer-flip-back" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            d="M5.4 19 6.5 16.2A7.2 7.2 0 1 1 9 18.4L5.4 19Zm4-10.6c-.3 0-.7.1-.9.5-.3.4-.8.9-.8 2.1 0 1.3.9 2.5 1 2.6.1.2 1.8 2.9 4.5 3.8 2.2.8 2.7.2 3.2-.2.4-.4.7-1.2.8-1.6.1-.3 0-.5-.2-.6l-1.8-.9c-.2-.1-.5-.1-.7.2l-.6.8c-.2.2-.4.2-.7.1-.4-.2-1.4-.5-2.2-1.3-.8-.8-1.2-1.8-1.3-2.1-.1-.3 0-.5.2-.7l.5-.6c.1-.2.2-.4.1-.6l-.8-1.9c-.1-.2-.2-.4-.4-.4Z"
+                          />
+                        </svg>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              <hr class="contact-divider" />
+
+              <!-- Contact Information -->
+              <a href="mailto:tsbd@teamsolutionsbangladesh.com">
+                tsbd@teamsolutionsbangladesh.com
+              </a>
+
+              <a href="tel:+8801718704000"> +880 1718704000 </a>
+
+              <a href="tel:+8801713867116"> +880 1713867116 </a>
+
+              <p>
+                9th floor, 252/2/Kha, Nabinbagh, West Meradia, Khilgaon, Dhaka,
+                Bangladesh
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================
+     FOOTER BOTTOM
+========================== -->
+      <div class="tsbd-footer-bottom">
+        <div class="container tsbd-footer-bottom-inner">
+          <p>© {% now "Y" %} Team Solutions Bangladesh. All rights reserved.</p>
+
+          <span class="tsbd-footer-badge">
+            Built for growth, innovation &amp; digital solutions
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =========================
+       CONTACT MODAL
+    ========================== -->
+    <div
+      class="modal fade tsbd-contact-modal"
+      id="contactModal"
+      tabindex="-1"
+      aria-labelledby="contactModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content tsbd-contact-modal-content">
+          <div class="tsbd-contact-modal-header">
+            <h2 id="contactModalLabel">Get in Touch with Us</h2>
+
+            <button
+              type="button"
+              class="tsbd-contact-modal-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <form method="post" action="{% url 'contact' %}" class="tsbd-contact-modal-form">
+            {% csrf_token %}
+
+            <div class="tsbd-contact-modal-body">
+              <div class="tsbd-contact-field">
+                <label for="contactModalName">Your Name</label>
+                <input
+                  id="contactModalName"
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div class="tsbd-contact-field">
+                <label for="contactModalEmail">Email Address</label>
+                <input
+                  id="contactModalEmail"
+                  type="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  autocomplete="email"
+                  required
+                />
+              </div>
+
+              <div class="tsbd-contact-field tsbd-contact-message-field">
+                <label for="contactModalMessage">Message</label>
+                <textarea
+                  id="contactModalMessage"
+                  name="message"
+                  rows="5"
+                  placeholder="Write your message here..."
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Optional fields are intentionally omitted from the UI to match the requested design. -->
+              <input type="hidden" name="phone" value="" />
+              <input type="hidden" name="subject" value="Website Contact Form" />
+
+              <button type="submit" class="tsbd-contact-send-btn">
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================
+       BOOTSTRAP JS
+  ========================== -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- =========================
+       MAIN JS
+  ========================== -->
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block extra_js %} {% endblock %}
+  </body>
+</html>

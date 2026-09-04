@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ service.title }} | TSBD{% endblock %}
+
+{% block content %}
+<section class="tsbd-detail-hero">
+  <div class="container">
+    <a href="{% url 'services' %}" class="tsbd-detail-back">← All Services</a>
+    <span class="tsbd-eyebrow">SERVICE MODULE</span>
+    <h1>{{ service.title }}</h1>
+    <p>{{ service.description }}</p>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-9">
+        <div class="text-center mb-5">
+          <span class="tsbd-eyebrow">HOW WE WORK</span>
+          <h2 class="fw-bold mt-2">Our Service Process</h2>
+          <p class="text-muted">A clear five-step approach designed to deliver reliable results.</p>
+        </div>
+
+        <div class="tsbd-detail-modules">
+          {% for module in service.modules %}
+          <div class="tsbd-detail-module">
+            <div class="tsbd-detail-module-number">{{ module.number }}</div>
+            <div>
+              <h3>{{ module.title }}</h3>
+              <p>{{ module.description }}</p>
+            </div>
+          </div>
+          {% empty %}
+          <div class="text-center text-muted">Service modules will be available soon.</div>
+          {% endfor %}
+        </div>
+
+        <div class="tsbd-detail-cta text-center mt-5">
+          <h3>Need a solution for your business?</h3>
+          <p>Let's discuss your requirements and find the right approach.</p>
+          <a href="{% url 'contact' %}" class="btn btn-primary rounded-pill px-4">Contact Us →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.tsbd-detail-hero{padding:100px 0 90px;background:linear-gradient(135deg,#172b3f,#263f56);color:#fff;}
+.tsbd-detail-hero h1{font-size:clamp(2.3rem,5vw,4.2rem);font-weight:800;letter-spacing:-.045em;margin:.6rem 0 1rem;}
+.tsbd-detail-hero p{max-width:760px;color:rgba(255,255,255,.72);font-size:1.05rem;line-height:1.8;margin:0;}
+.tsbd-detail-back{display:inline-block;color:#fff;text-decoration:none;opacity:.8;margin-bottom:38px;}
+.tsbd-detail-back:hover{opacity:1;}
+.tsbd-detail-modules{display:grid;gap:16px;}
+.tsbd-detail-module{display:grid;grid-template-columns:68px 1fr;gap:22px;align-items:start;padding:25px;border:1px solid #e2e8f0;border-radius:20px;background:#fff;box-shadow:0 10px 30px rgba(16,24,40,.05);transition:.3s ease;}
+.tsbd-detail-module:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(129, 164, 234, 0.09);}
+.tsbd-detail-module-number{width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#eef4ff;color:#155eef;font-weight:800;}
+.tsbd-detail-module h3{margin:3px 0 8px;font-size:1.18rem;font-weight:800;color:#152536;}
+.tsbd-detail-module p{margin:0;color:#687789;line-height:1.7;}
+.tsbd-detail-cta{padding:38px;border-radius:24px;background:#fff;border:1px solid #e2e8f0;}
+.tsbd-detail-cta h3{font-weight:800;}
+.tsbd-detail-cta p{color:#687789;}
+@media(max-width:575.98px){.tsbd-detail-module{grid-template-columns:1fr;}.tsbd-detail-module-number{width:48px;height:48px;border-radius:13px;}}
+</style>
+{% endblock %}

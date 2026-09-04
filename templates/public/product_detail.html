@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ product.product_name }} | Team Solutions Bangladesh{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <a href="{% url 'products' %}" class="text-link">← All products</a>
+    <div class="split-heading" style="margin-top:24px">
+      <div>
+        <span class="eyebrow">PRODUCT</span>
+        <h1>{{ product.product_name }}</h1>
+      </div>
+    </div>
+    {% if product.image_url %}
+      <img src="{{ product.image_url }}" alt="{{ product.product_name }}" style="max-width:100%;border-radius:20px;margin:20px 0">
+    {% endif %}
+    <p>{{ product.product_details|linebreaksbr }}</p>
+  </div>
+</section>
+{% endblock %}
