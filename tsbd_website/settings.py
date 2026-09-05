@@ -1,14 +1,10 @@
 import os
 from pathlib import Path
 
-<<<<<<< HEAD
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
-=======
-BASE_DIR = Path(__file__).resolve().parent.parent
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-change-this-in-production")
 DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
@@ -73,20 +69,11 @@ ASGI_APPLICATION = "tsbd_website.asgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-<<<<<<< HEAD
         "NAME": os.getenv("DB_NAME", "tsbd_website"),
         "USER": os.getenv("DB_USER", "root"),
         "PASSWORD": os.getenv("DB_PASSWORD", ""),
         "HOST": os.getenv("DB_HOST", "127.0.0.1"),
         "PORT": os.getenv("DB_PORT", "3306"),
-=======
-        "NAME":  "tsbd_website",
-        "USER": "root",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "3306",
-        
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     }
 }
 

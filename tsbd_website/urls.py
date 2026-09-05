@@ -9,11 +9,7 @@ urlpatterns = [
     path("dashboard/", include("dashboard.urls")),
     path("dashboard/products/", include("products.urls")),
     path("dashboard/blog/", include("blog.urls")),
-<<<<<<< HEAD
     path("dashboard/team/", include(("team.urls", "team"), namespace="team")),
-=======
-    path('dashboard/team/',include('team.urls')),
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 ]
 
 if settings.DEBUG:

@@ -31,11 +31,7 @@
           </div>
           <div class="team-card-actions">
             {% if member.linkedin %}<a class="team-social-link" href="{{ member.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="{{ member.name }} on LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8.5H3.25V19H6.5V8.5ZM4.88 3A1.88 1.88 0 1 0 4.88 6.75 1.88 1.88 0 0 0 4.88 3ZM19 12.98c0-3.16-1.68-4.63-3.93-4.63a3.39 3.39 0 0 0-3.08 1.69V8.5H8.75V19H12v-5.2c0-1.37.26-2.7 1.96-2.7 1.68 0 1.7 1.57 1.7 2.79V19H19v-6.02Z"/></svg></a>{% endif %}
-<<<<<<< HEAD
             <a class="team-details-btn" href="{% url 'team-detail' member.id %}">See details <span>→</span></a>
-=======
-            <a class="team-details-btn" href="{% url 'team-detail' member.slug %}">See details <span>→</span></a>
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
           </div>
         </div>
       </article>

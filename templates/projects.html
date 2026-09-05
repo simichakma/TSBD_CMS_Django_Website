@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Projects | Team Solutions Bangladesh{% endblock %}
-<<<<<<< HEAD
 {% block content %}
 <section class="page-hero"><div class="container"><span class="eyebrow">OUR PROJECTS</span><h1>Selected projects</h1><p>A selection of real-world projects showcasing our expertise and capabilities.</p></div></section>
 <section class="section tsbd-entity-section"><div class="container"><div class="project-grid">
@@ -12,38 +11,4 @@
 </article>
 {% empty %}<div class="empty-state">No projects are available right now.</div>{% endfor %}
 </div></div></section>
-=======
-
-{% block content %}
-<section class="page-hero">
-  <div class="container">
-    <span class="eyebrow">OUR PROJECTS</span>
-    <h1>Selected digital solutions.</h1>
-    <p>A selection of practical projects and technology solutions.</p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container project-grid">
-    {% for project in projects %}
-    <article class="project-card">
-      <div class="project-image">
-        {% if project.image_url %}
-          <img src="{{ project.image_url }}" alt="{{ project.title }}">
-        {% endif %}
-      </div>
-      <div class="project-body">
-        {% if project.service_name %}
-          <span class="eyebrow">{{ project.service_name }}</span>
-        {% endif %}
-        <h3>{{ project.title }}</h3>
-        <p>{{ project.text }}</p>
-      </div>
-    </article>
-    {% empty %}
-      <p>No projects are available right now.</p>
-    {% endfor %}
-  </div>
-</section>
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 {% endblock %}

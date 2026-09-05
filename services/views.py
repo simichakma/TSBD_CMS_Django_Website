@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.db import connection, transaction
 from django.shortcuts import redirect, render
 
@@ -16,18 +15,6 @@ def _module_rows(service_id):
         rows = cursor.fetchall()
     return rows
 
-=======
-from django.db import connection
-from django.shortcuts import redirect, render
-
-
-def home_view(request):
-    services = _get_services()
-    context = {
-        'services': services,
-    }
-    return render(request, 'index.html', context) 
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 def _get_services():
     with connection.cursor() as cursor:
@@ -38,7 +25,6 @@ def _get_services():
         """)
         rows = cursor.fetchall()
 
-<<<<<<< HEAD
     services = []
     for row in rows:
         modules = _module_rows(row[0])
@@ -54,17 +40,6 @@ def _get_services():
             item[f"point_{number}_description"] = found[2] if found else ""
         services.append(item)
     return services
-=======
-    return [
-        {
-            "id": row[0],
-            "service_name": row[1],
-            "service_details": row[2] or "",
-            "status": row[3],
-        }
-        for row in rows
-    ]
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
 
 def service_list(request):
@@ -72,10 +47,7 @@ def service_list(request):
         "services": _get_services(),
     })
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 def service_save(request):
     if request.method == "POST":
         service_id = request.POST.get("service_id", "").strip()
@@ -83,7 +55,6 @@ def service_save(request):
         service_details = request.POST.get("service_details", "").strip()
         status = 1 if request.POST.get("status") == "1" else 0
 
-<<<<<<< HEAD
         with transaction.atomic():
             with connection.cursor() as cursor:
                 if service_id:
@@ -114,37 +85,14 @@ def service_save(request):
                             title = VALUES(title),
                             description = VALUES(description)
                     """, [current_id, number, title, description])
-=======
-        if service_id:
-            with connection.cursor() as cursor:
-                cursor.execute("""
-                    UPDATE tsbd_services
-                    SET service_name = %s,
-                        service_details = %s,
-                        status = %s
-                    WHERE id = %s
-                """, [service_name, service_details, status, service_id])
-        else:
-            with connection.cursor() as cursor:
-                cursor.execute("""
-                    INSERT INTO tsbd_services
-                    (service_name, service_details, status)
-                    VALUES (%s, %s, %s)
-                """, [service_name, service_details, status])
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
 
     return redirect("service_list")
 
 
 def service_delete(request, service_id):
     if request.method == "POST":
-<<<<<<< HEAD
         with transaction.atomic():
             with connection.cursor() as cursor:
                 cursor.execute("DELETE FROM tsbd_service_modules WHERE service_id = %s", [service_id])
                 cursor.execute("DELETE FROM tsbd_services WHERE id = %s", [service_id])
-=======
-        with connection.cursor() as cursor:
-            cursor.execute("DELETE FROM tsbd_services WHERE id = %s", [service_id])
->>>>>>> 5501b4d12a9573602d1e327d5599a5f07fcdc2de
     return redirect("service_list")
